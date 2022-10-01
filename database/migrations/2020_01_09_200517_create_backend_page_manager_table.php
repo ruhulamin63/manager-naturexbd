@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateBackendPageManagerTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('kt_backend_page_manager', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('page_title');
+            $table->text('page_id');
+            $table->text('page_view');
+            $table->text('updated_by');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('kt_backend_page_manager');
+    }
+}

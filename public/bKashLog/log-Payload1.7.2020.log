@@ -1,0 +1,13 @@
+SubscriptionConfirmation237e5092-ca7e-4785-916b-22df1eee34602336412f37fb687f5d51e6e2425f004aee4aa29e75716bd1344b5430f17dbd2ae4e873cc289ed7cbf8648e5808d309d8390eef5fb73663108fb330bb48aa2b2a890c3eb63cf9d3fdd6e1069aa20c50667414d612e9a4b0266b45ec60d529c26e4231f49b13485394d52036100c04dc165be7813d5ac972eba530b1f3ca003ce4arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAYYou have chosen to subscribe to the topic arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY.
+To confirm the subscription, visit the SubscribeURL included in this message.https://sns.ap-southeast-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY&Token=2336412f37fb687f5d51e6e2425f004aee4aa29e75716bd1344b5430f17dbd2ae4e873cc289ed7cbf8648e5808d309d8390eef5fb73663108fb330bb48aa2b2a890c3eb63cf9d3fdd6e1069aa20c50667414d612e9a4b0266b45ec60d529c26e4231f49b13485394d52036100c04dc165be7813d5ac972eba530b1f3ca003ce42020-07-01T07:39:53.233Z1QMMXAIoNmW6VkqCNq0tl5ZJFv/Q3o2owPlwFX3Ub51ae55cuarfMHOMhyYY6ECSgqEQ0QflK6rO8qIeQPOkRZH1D/8VAPjaVbAbgSl9hAxyGOOZwZp5Gpa0RlfDeAPM9l2HPxlXu1LiEWLcFsVB7hcGlZK5BIOzNeeOm2WzsSyRo1Z8E6wXfqmAOxPeTcTD8xlCFiUiLiounYpt/yBTyh2Zxu5vl3kpjwg5zfUEv2OmdIN+S8mJiypytDPgz5QEx/4L0mrHa0CFJvedIK+LC7r7w7clS9phVQBLwM0ccN4ZCF6qA5f9BjqMpsNS+0+uBPG/aS24fHzyW0no91yh9AQ==https://sns.ap-southeast-1.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pemNotification2ec379a5-c083-5ba6-a360-2ed380091cd0arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY{
+       "dateTime":"20200701103300",
+       "debitMSISDN":"8801770608575",
+       "creditOrganizationName":"Khaidai Today",
+       "creditShortCode":"KHAIDAITODAY",
+       "trxID":"6H5708L9HH",
+       "transactionStatus":"Completed",
+       "transactionType":"1003",
+       "amount":"111",
+       "currency":"BDT",
+      "transactionReference":"Test Payload" 
+       }2020-07-01T07:42:02.547Z1pyDsQStHSDkylrwH0FsCPBHZtEL/a9gV3bFgfLBTxQM1pDjsoL/ado4cxzERFT21bCMJa4vys/1zoVwzxc6AksSJlu5DbEbY26eQcELYB9YXsx5BndOPHEg3C9hk/JyqYPxuGGOAcU0GYWfDKNJW7KqVmdVmiGDg+tT7+WbQl5CcOVTmV36sOFXwwL9Eap6GX5OAkCCz7/BUOOlPix8tjwSOcvq2GmVMK/QEBWDn+mL9qfSGAemqysCjOyu3Q0nvayhjKGLXpz5PB7XbDS4iBQYt4mWh3jcLYDZyZtl7P0eJq0CJs+2fdknhX+81xYsZDSwBPCNnyyvLMiD5pVIUnA==https://sns.ap-southeast-1.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pemhttps://sns.ap-southeast-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY:37872004-b41c-4bf1-a29f-116c29a87272
