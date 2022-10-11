@@ -16,7 +16,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           command: |
-            cd public_html/naturexbdmanager/
+            cd public_html/www.naturexbdmanager.com/
             php artisan config:clear
             php artisan view:clear
             php artisan route:clear
@@ -29,7 +29,7 @@ jobs:
           port: ${{ secrets.port }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /
+          server-dir: /public_html/www.naturexbdmanager.com/
 
 
 
