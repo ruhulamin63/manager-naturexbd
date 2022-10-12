@@ -16,7 +16,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           command: |
-            cd public_html/www.naturexbdmanager.com/
+            cd naturexbd_manager/
             php artisan config:clear
             php artisan view:clear
             php artisan route:clear
