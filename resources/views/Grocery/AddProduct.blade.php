@@ -89,6 +89,7 @@
                                                     <textarea class="form-control" name="product_description" id="basicTextarea" rows="3" placeholder="Product Description" required></textarea>
                                                 </fieldset>
                                             </div>
+
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
@@ -96,8 +97,15 @@
                                                         <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>
                                                     </div>
                                                 </fieldset>
+
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label>Multiple Image</label>--}}
+{{--                                                    <div class="dropzone" id="mydropzone">--}}
+{{--                                                        <input name="product_thumbnail[]"  type="file" multiple  style="display: none;" required/>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
-                                            
+
                                             <div class="col-12 col-sm-12 col-lg-6 mb-1 product_old_price_for_offer" style="display:none;">
                                                 <input type="number" class="form-control" name="product_old_price" placeholder="Enter product old price" value="0" required>
                                             </div>
@@ -140,7 +148,7 @@
     @include('Layout_Grocery.scripts')
     <script>
       CKEDITOR.replace( 'product_description' );
-</script>
+    </script>
 
     <script>
         function offerProduct() {
@@ -152,6 +160,11 @@
             }
         }
     </script>
+
+{{--    <link rel="stylesheet" type="text/css" href="{{asset('assets/bundles/dropzonejs/dropzone.css')}}">--}}
+
+{{--    <script type="application/javascript" src="{{asset('assets/bundles/dropzonejs/min/dropzone.min.js')}}"></script>--}}
+{{--    <script type="application/javascript" src="{{asset('assets/js/page/multiple-upload.js')}}"></script>--}}
 
 </body>
 @endsection

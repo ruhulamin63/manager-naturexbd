@@ -82,6 +82,23 @@ class ProductController extends Controller
                                 $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
                             }
 
+//                            if($request->file('attachment')){
+//
+//                                foreach ($request->attachment as $key => $file) {
+//
+//                                    $best_practice_file = new BestPracticeFile;
+//
+//
+//                                    $name = '/uploads/best-practices/' . uniqid() . '.' . $file->getClientOriginalName();
+//                                    $path = public_path('/uploads/best-practices/');
+//                                    $file->move($path, $name);
+//
+//                                    $best_practice_file->product_thumbnail = $name;
+//                                    $best_practice_file->save();
+//                                }
+//                            }
+
+
                             $newProduct = new Products();
                             $newProduct->cityID = $city->id;
                             $newProduct->category = $request->input('product_category');

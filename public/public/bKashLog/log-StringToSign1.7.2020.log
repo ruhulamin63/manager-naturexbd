@@ -1,0 +1,38 @@
+Message
+You have chosen to subscribe to the topic arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY.
+To confirm the subscription, visit the SubscribeURL included in this message.
+MessageId
+237e5092-ca7e-4785-916b-22df1eee3460
+SubscribeURL
+https://sns.ap-southeast-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY&Token=2336412f37fb687f5d51e6e2425f004aee4aa29e75716bd1344b5430f17dbd2ae4e873cc289ed7cbf8648e5808d309d8390eef5fb73663108fb330bb48aa2b2a890c3eb63cf9d3fdd6e1069aa20c50667414d612e9a4b0266b45ec60d529c26e4231f49b13485394d52036100c04dc165be7813d5ac972eba530b1f3ca003ce4
+Timestamp
+2020-07-01T07:39:53.233Z
+Token
+2336412f37fb687f5d51e6e2425f004aee4aa29e75716bd1344b5430f17dbd2ae4e873cc289ed7cbf8648e5808d309d8390eef5fb73663108fb330bb48aa2b2a890c3eb63cf9d3fdd6e1069aa20c50667414d612e9a4b0266b45ec60d529c26e4231f49b13485394d52036100c04dc165be7813d5ac972eba530b1f3ca003ce4
+TopicArn
+arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY
+Type
+SubscriptionConfirmation
+
+Message
+{
+       "dateTime":"20200701103300",
+       "debitMSISDN":"8801770608575",
+       "creditOrganizationName":"Khaidai Today",
+       "creditShortCode":"KHAIDAITODAY",
+       "trxID":"6H5708L9HH",
+       "transactionStatus":"Completed",
+       "transactionType":"1003",
+       "amount":"111",
+       "currency":"BDT",
+      "transactionReference":"Test Payload" 
+       }
+MessageId
+2ec379a5-c083-5ba6-a360-2ed380091cd0
+Timestamp
+2020-07-01T07:42:02.547Z
+TopicArn
+arn:aws:sns:ap-southeast-1:797962984373:bpt_KHAIDAITODAY
+Type
+Notification
+
