@@ -83,42 +83,17 @@
     <div class="main-menu-content" style="padding-bottom: 100px;">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             @php
-                $permission = \App\Models\Grocery\Admin::select('*')->where('email', session()->get('GR_MANAGER_EMAIL'))->get();
-                $permission = $permission[0];
+            $permission = \App\Models\Grocery\Admin::select('*')->where('email', session()->get('GR_MANAGER_EMAIL'))->get();
+            $permission = $permission[0];
             @endphp
-
             @if(strpos($permission, 'home') !== false)
-                <li class="nav-item @if(url('/grocery/dashboard') == Request::url()) active @endif">
-                    <a class="nav-hover" href="{{ url('/grocery/dashboard') }}">
-                        <i class="bx bx-desktop mr-50"></i>
-                        <span class="menu-title">Dashboard</span>
-                    </a>
-                </li>
-            @endif
-
-{{--            start blog--}}
-            <li class=" navigation-header"><span>Blog Menu</span></li>
-            <li class="nav-item">
-                <a class="nav-hover" href="#">
-                    <i class="bx bxs-package mr-50"></i>
-                    <span class="menu-title">Blog</span>
+            <li class="nav-item @if(url('/grocery/dashboard') == Request::url()) active @endif">
+                <a class="nav-hover" href="{{ url('/grocery/dashboard') }}">
+                    <i class="bx bx-desktop mr-50"></i>
+                    <span class="menu-title">Dashboard</span>
                 </a>
-                <ul class="menu-content">
-                    <li class="nav-item @if(url('/restaurant/addProduct') == Request::url()) active @endif">
-                        <a class="nav-hover" href="{{ url('/restaurant/addProduct')}}">
-                            <i class="bx bx-add-to-queue mr-50"></i>
-                            <span class="menu-title">Create Blog</span>
-                        </a>
-                    </li>
-                    <li class="nav-item @if(url('/restaurant/allProduct') == Request::url()) active @endif">
-                        <a class="nav-hover" href="{{ url('/restaurant/allProduct')}}">
-                            <i class="bx bxs-package mr-50"></i>
-                            <span class="menu-title">Show Blog</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
-{{--            end blog--}}
+            @endif
 
             <!-- Restaurant Menu Start -->
             <li class=" navigation-header"><span>Restaurant Menu</span></li>
@@ -176,7 +151,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class=" navigation-header"><span>Product</span></li>
                     <li class="nav-item">
                         <a class="nav-hover" href="#">
@@ -275,34 +249,33 @@
             </li>
             @endif
             @if(strpos($permission, 'category') !== false || strpos($permission, 'product') !== false)
-                <li class=" navigation-header"><span>Inventory</span></li>
+            <li class=" navigation-header"><span>Inventory</span></li>
             @endif
-
             @if(strpos($permission, 'category') !== false)
-                <li class="nav-item has-sub">
-                    <a href="#">
-                        <i class="bx bx-restaurant mr-50"></i>
-                        <span class="menu-title" data-i18n="Category Manager">Category Manager</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li class="nav-item @if(url('/grocery/category/add') == Request::url()) active @endif">
-                            <a class="nav-hover" href="{{ url('/grocery/category/add') }}">
-                                <i class="bx bx-add-to-queue mr-50"></i>
-                                <span class="menu-title">Add New Category</span>
-                            </a>
-                        </li>
-                        @foreach($cityList as $city)
-                        @if(strpos(strtoupper($permission), strtoupper($city->city_name)) !== false)
-                        <li class="nav-item @if(isset($cityID) && $cityID == $city->id && (url('/grocery/category') == Request::url())) active @endif">
-                            <a class="nav-hover" href="{{ url('/grocery/category') . '?city=' . $city->id }}">
-                                <i class="bx bxs-navigation mr-50"></i>
-                                <span class="menu-title">{{ $city->city_name }}</span>
-                            </a>
-                        </li>
-                        @endif
-                        @endforeach
-                    </ul>
-                </li>
+            <li class="nav-item has-sub">
+                <a href="#">
+                    <i class="bx bx-restaurant mr-50"></i>
+                    <span class="menu-title" data-i18n="Category Manager">Category Manager</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item @if(url('/grocery/category/add') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/grocery/category/add') }}">
+                            <i class="bx bx-add-to-queue mr-50"></i>
+                            <span class="menu-title">Add New Category</span>
+                        </a>
+                    </li>
+                    @foreach($cityList as $city)
+                    @if(strpos(strtoupper($permission), strtoupper($city->city_name)) !== false)
+                    <li class="nav-item @if(isset($cityID) && $cityID == $city->id && (url('/grocery/category') == Request::url())) active @endif">
+                        <a class="nav-hover" href="{{ url('/grocery/category') . '?city=' . $city->id }}">
+                            <i class="bx bxs-navigation mr-50"></i>
+                            <span class="menu-title">{{ $city->city_name }}</span>
+                        </a>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
+            </li>
             @endif
             @if(strpos($permission, 'product') !== false)
             <li class="nav-item has-sub">
