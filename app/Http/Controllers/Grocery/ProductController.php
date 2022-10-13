@@ -43,6 +43,8 @@ class ProductController extends Controller
 
     public function createProduct(Request $request)
     {
+//        return $request->all();
+
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'add_product')) {
                 $validator = Validator::make($request->all(), [
@@ -90,10 +92,16 @@ class ProductController extends Controller
                             $newProduct->product_price = $request->input('product_price');
                             $newProduct->measuring_unit = "N/A";
                             $newProduct->product_type = $request->input('product_type');
+
+                            $newProduct->meta_title = $request->input('meta_title');
+                            $newProduct->meta_description = $request->input('meta_description');
+                            $newProduct->meta_keywords = $request->input('meta_keywords');
+
                             $newProduct->product_description = $request->input('product_description');
                             $newProduct->offer_old_price = $request->input('product_old_price');
                             $newProduct->product_thumbnail = $imageURL;
                             $newProduct->measuring_unit_new = $request->input('measuring_unit_new');;
+
                             if (in_array($city->id, $cityCoverage)) {
                                 $newProduct->status = 'Active';
                             } else {

@@ -74,22 +74,19 @@
                                                 <input type="text" class="form-control" name="measuring_unit_new" value="{{ $productDetails->measuring_unit_new }}" placeholder="Enter Measuring unit" required>
                                             </div>
 
-
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Title &nbsp;&nbsp; *(SEO)</label>
                                                 <input type="text" class="form-control" name="meta_title" value="{{ $productDetails->meta_title }}" placeholder="Enter Title">
                                             </div>
 
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                                <label>Meta Description &nbsp; &nbsp; *(SEO)</label>
+                                                <label>Meta Description &nbsp; &nbsp; <span style="color: #96271A">*SEO</span></label>
                                                 <textarea type="text" class="form-control" name="meta_description" value="" placeholder="Enter Description">{{ $productDetails->meta_description }}</textarea>
                                             </div>
-
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: PHP Laravel Project)</span></label>
+                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Product)</span></label>
                                                     <textarea type="text" class="form-control" name="meta_keywords" value="" placeholder="Enter Keywords">{{ $productDetails->meta_keywords }}</textarea>
                                             </div>
-
 
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">

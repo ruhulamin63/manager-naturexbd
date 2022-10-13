@@ -84,6 +84,20 @@
                                             <div class="col-12 col-sm-12 col-lg-6 mb-1">
                                                 <input type="text" class="form-control" name="measuring_unit_new" placeholder="Enter measuring unit" required>
                                             </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-2">
+                                                <label>Meta Title &nbsp;&nbsp; <span style="color: #96271A">*SEO</span></label>
+                                                <input type="text" class="form-control" name="meta_title" placeholder="Enter Title" required>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Meta Description &nbsp; &nbsp; <span style="color: #96271A">*SEO</span></label>
+                                                <textarea type="text" class="form-control" name="meta_description" value="" placeholder="Enter Description" required></textarea>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Product)</span></label>
+                                                <textarea type="text" class="form-control" name="meta_keywords" value="" placeholder="Enter Keywords"></textarea>
+                                            </div>
+
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">
                                                     <textarea class="form-control" name="product_description" id="basicTextarea" rows="3" placeholder="Product Description" required></textarea>
@@ -97,7 +111,7 @@
                                                     </div>
                                                 </fieldset>
                                             </div>
-                                            
+
                                             <div class="col-12 col-sm-12 col-lg-6 mb-1 product_old_price_for_offer" style="display:none;">
                                                 <input type="number" class="form-control" name="product_old_price" placeholder="Enter product old price" value="0" required>
                                             </div>
