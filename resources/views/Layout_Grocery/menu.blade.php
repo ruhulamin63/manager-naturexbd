@@ -95,6 +95,32 @@
             </li>
             @endif
 
+{{--            Start Blog Menu--}}
+{{--            @if(strpos($permission, 'product') !== false)--}}
+                <li class="nav-item has-sub">
+                    <a href="#">
+                        <i class="bx bxs-package mr-50"></i>
+                        <span class="menu-title" data-i18n="Category Manager">Blog Menu</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item @if(url('/blog/show') == Request::url()) active @endif">
+                            <a class="nav-hover" href="{{ url('/blog/show')}}">
+                                <i class="bx bxs-navigation mr-50"></i>
+                                <span class="menu-title">Show Blog</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @if(url('/blog/create') == Request::url()) active @endif">
+                            <a class="nav-hover" href="{{ url('/blog/create') }}">
+                                <i class="bx bx-add-to-queue mr-50"></i>
+                                <span class="menu-title">Create Blog</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+{{--            @endif--}}
+{{--            End Blog Menu--}}
+
             <!-- Restaurant Menu Start -->
             <li class=" navigation-header"><span>Restaurant Menu</span></li>
             <li class="nav-item has-sub">
@@ -248,6 +274,7 @@
                 </ul>
             </li>
             @endif
+
             @if(strpos($permission, 'category') !== false || strpos($permission, 'product') !== false)
             <li class=" navigation-header"><span>Inventory</span></li>
             @endif
@@ -277,6 +304,7 @@
                 </ul>
             </li>
             @endif
+
             @if(strpos($permission, 'product') !== false)
             <li class="nav-item has-sub">
                 <a href="#">
@@ -330,6 +358,7 @@
                 </ul>
             </li>
             @endif
+
             @if(strpos($permission, 'product_analysis') !== false)
             <li class="nav-item has-sub">
                 <a href="#">

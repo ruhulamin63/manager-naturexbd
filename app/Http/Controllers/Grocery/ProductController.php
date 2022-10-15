@@ -8,10 +8,10 @@ use App\Models\Grocery\Category;
 use App\Models\Grocery\City;
 use App\Models\Grocery\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use DB;
 
 class ProductController extends Controller
 {

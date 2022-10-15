@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Controllers\Grocery\BlogController;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return redirect('/dashboard');
 });
@@ -91,6 +94,14 @@ Route::get('/grocery/category/edit', 'Grocery\RouteController@editCategory');
 Route::post('/grocery/category/edit/confirm', 'Grocery\CategoryController@editCategory');
 Route::post('/grocery/category/status/update', 'Grocery\CategoryController@categoryStatusUpdate');
 Route::post('/grocery/category/prePayment/update', 'Grocery\CategoryController@categoryPrepaymentUpdate');
+
+
+//start writing by Ruhul
+Route::get('/blog/show',[BlogController::class, 'index'])->name('blog.show');
+Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
+Route::post('/blog/store',[BlogController::class, 'store'])->name('blog.store');
+//End writing by Ruhul
+
 
 Route::get('/grocery/products', 'Grocery\RouteController@products');
 Route::get('/grocery/products/regenerate', 'Grocery\ProductController@regenerateProducts');
@@ -191,7 +202,7 @@ Route::post('/payment/bkash/trx/refund/status', 'PaymentGateway\bKash@refund_sta
 Route::get('/payment/aamarpay/checkout/{order_id}', 'PaymentGateway\Aamarpay@index');
 
 
-//start(new-R) 
+//start(new-R)
 Route::get('/grocery/SeasonalProduct/add', 'Grocery\RouteController@addSeasonalProduct');
 Route::get('/grocery/SeasonalProduct/addSeasonalCampain', 'Grocery\RouteController@addSeasonalCampain');
 
@@ -298,7 +309,7 @@ Route::post('/restaurant/order/edit/discount', 'Restaurant\OrderController@apply
 // Route::post('/grocery/order/createWebOrder', 'Grocery\OrderController@createWebOrder');
 Route::post('/restaurant/order/schedule', 'Restaurant\OrderController@changeSchedule');
 
-// Restaurant END 
+// Restaurant END
 
 //server Maintenance
 Route::get('/serverMaintenance', 'Grocery\MaintenanceController@serverMaintenance');
