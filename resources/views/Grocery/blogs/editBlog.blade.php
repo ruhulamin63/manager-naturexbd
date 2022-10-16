@@ -3,9 +3,9 @@
 @section('body')
 
     <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
     @include('Layout_Grocery.menu')
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -45,23 +45,23 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add New Blog</h4>
+                                <h4 class="card-title">Edit Blog</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('blog.store') }}" enctype="multipart/form-data" method="POST">
+                                    <form action="{{ url('blog/update/'. $blogData->id) }}" enctype="multipart/form-data" method="POST">
                                         @csrf
+                                        <input type="text" name="blog_id" value="{{ $blogData->id }}" required hidden />
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-lg-12">
-                                                <label >Blog Name</label>
-                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter title">
-                                                <br>
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-2">
+                                                <label>Blog Title</label>
+                                                <input type="text" class="form-control" name="title" value="{{ $blogData->title }}" placeholder="Enter product name" required>
                                             </div>
 
                                             <div class="col-12 col-sm-12">
                                                 <label >Description</label>
                                                 <fieldset class="form-group">
-                                                    <textarea class="form-control" name="blog_description" id="basicTextarea" rows="3" placeholder="Blog Description"></textarea>
+                                                    <textarea class="form-control" name="blog_description" id="basicTextarea" rows="3" placeholder="Blog Description">{{ $blogData->description }}</textarea>
                                                 </fieldset>
                                             </div>
 
@@ -85,8 +85,8 @@
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-12 col-sm-12" style="margin-top: 10px;">
-                                                <button type="submit" class="btn btn-block btn-success glow">Submit</button>
+                                            <div class="col-12 col-sm-12" style="margin-top: 10px">
+                                                <button type="submit" class="btn btn-block btn-success glow">Update Product</button>
                                             </div>
                                         </div>
                                     </form>
@@ -110,17 +110,6 @@
 
     <script>
         CKEDITOR.replace( 'blog_description' );
-    </script>
-
-    <script>
-        function offerProduct() {
-            if ($("#product_type").val() == "3") {
-                $('.product_old_price_for_offer').show();
-
-            }else{
-                $('.product_old_price_for_offer').hide();
-            }
-        }
     </script>
 
     </body>

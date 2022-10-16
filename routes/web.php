@@ -100,6 +100,10 @@ Route::post('/grocery/category/prePayment/update', 'Grocery\CategoryController@c
 Route::get('/blog/show',[BlogController::class, 'index'])->name('blog.show');
 Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
 Route::post('/blog/store',[BlogController::class, 'store'])->name('blog.store');
+Route::get('/blog/edit/{id}',[BlogController::class, 'edit'])->name('blog.edit');
+Route::post('/blog/update/{id}',[BlogController::class, 'update'])->name('blog.update');
+Route::post('/blog/status/update', [BlogController::class, 'blogStatusUpdate'])->name('blog.status.update');
+
 //End writing by Ruhul
 
 
