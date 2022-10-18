@@ -61,7 +61,7 @@
                                                 <th>Title</th>
                                                 <th>Slug</th>
                                                 <th>Description</th>
-{{--                                                <th>Video</th>--}}
+                                                <th>Video</th>
                                                 <th>Created On</th>
                                                 <th>Status</th>
                                                 <th class="text-center">Action</th>
@@ -93,6 +93,17 @@
                                                     <td>
                                                        {{ $item->description }}
                                                     </td>
+
+                                                    @if($item->video_path)
+                                                        <td>
+                                                            <iframe src="{{ asset('/storage/'.$item->video_path) }}" height="80px" width="200px" alt="blog video" style="border: 1px solid #000000;"></iframe>
+                                                        </td>
+                                                    @else
+                                                        <td style="color: #96271A">
+                                                            No Video
+                                                        </td>
+                                                    @endif
+
                                                     <td>
                                                         {{ date('d M Y h:i:s A', strtotime($item->created_at)) }}
                                                     </td>
