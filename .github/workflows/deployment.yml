@@ -29,8 +29,6 @@ jobs:
           port: ${{ secrets.port }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          protocol: ftp
-
           server-dir: /naturexbdmanager/
 
 
