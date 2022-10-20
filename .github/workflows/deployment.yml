@@ -16,7 +16,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           command: |
-            cd naturexbdmanager/
+            git pull
             php artisan config:clear
             php artisan view:clear
             php artisan route:clear
@@ -24,12 +24,11 @@ jobs:
             php artisan route:cache
             php artisan optimize:clear
             composer dump-autoload
-             php artisan migrate
           server: ${{ secrets.server_host }}
           port: ${{ secrets.port }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /naturexbdmanager/
+          server-dir: /var/www/html
 
 
 
