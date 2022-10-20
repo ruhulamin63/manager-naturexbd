@@ -1,8 +1,5 @@
 name: 🚀 Deploy website on Staging/Demo Server
-on:
-  push:
-    branches:
-      - master
+on: [push]
 jobs:
   web-deploy:
     if: github.ref == 'refs/heads/master'
