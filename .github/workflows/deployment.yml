@@ -12,7 +12,7 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: 🚚 Executing Git Pull on Server.
+      - name: 🚚 Executing Git Pull on Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           command: |
