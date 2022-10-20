@@ -1,5 +1,8 @@
 name: 🚀 Deploy website on Staging/Demo Server
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   web-deploy:
     if: github.ref == 'refs/heads/master'
@@ -22,7 +25,6 @@ jobs:
             php artisan optimize:clear
             composer dump-autoload
              php artisan migrate
-
           server: ${{ secrets.server_host }}
           port: ${{ secrets.port }}
           username: ${{ secrets.ftp_username }}
