@@ -17,6 +17,7 @@ obs:
           server: ${{ secrets.server_host }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
+          server-dir: /public_html/naturexmanager/
 
 
 
