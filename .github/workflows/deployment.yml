@@ -1,35 +1,22 @@
 name: 🚀 Deploy website on Staging/Demo Server
 on:
   push:
-    branches:
-      - master
-jobs:
-  web-deploy:
-    if: github.ref == 'refs/heads/master'
-    name: 🎉 Deploy on Development Branch
+    branches: [master]
+obs:
+  deploy:
+    name: 🚀 Deploy website every commit
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
-      - name: 🚚 Executing Git Pull on Server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+
+      - name: 📂 Sync files
+        uses: ./
         with:
-          command: |
-            cd /public_html/naturexmanager/
-            git pull
-            php artisan config:clear
-            php artisan view:clear
-            php artisan route:clear
-            php artisan cache:clear
-            php artisan route:cache
-            php artisan optimize:clear
-            composer dump-autoload
           server: ${{ secrets.server_host }}
-          port: ${{ secrets.port }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /public_html/naturexmanager/
 
 
 
