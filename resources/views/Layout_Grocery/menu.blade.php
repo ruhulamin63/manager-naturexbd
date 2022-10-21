@@ -87,38 +87,36 @@
             $permission = $permission[0];
             @endphp
             @if(strpos($permission, 'home') !== false)
-            <li class="nav-item @if(url('/grocery/dashboard') == Request::url()) active @endif">
-                <a class="nav-hover" href="{{ url('/grocery/dashboard') }}">
-                    <i class="bx bx-desktop mr-50"></i>
-                    <span class="menu-title">Dashboard</span>
-                </a>
-            </li>
+                <li class="nav-item @if(url('/grocery/dashboard') == Request::url()) active @endif">
+                    <a class="nav-hover" href="{{ url('/grocery/dashboard') }}">
+                        <i class="bx bx-desktop mr-50"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
             @endif
 
 {{--            Start Blog Menu--}}
-{{--            @if(strpos($permission, 'product') !== false)--}}
-                <li class="nav-item has-sub">
-                    <a href="#">
-                        <i class="bx bxs-package mr-50"></i>
-                        <span class="menu-title" data-i18n="Category Manager">Blog Menu</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li class="nav-item @if(url('/blog/show') == Request::url()) active @endif">
-                            <a class="nav-hover" href="{{ url('/blog/show')}}">
-                                <i class="bx bxs-navigation mr-50"></i>
-                                <span class="menu-title">Show Blog</span>
-                            </a>
-                        </li>
+            <li class="nav-item has-sub">
+                <a href="#">
+                    <i class="bx bxs-package mr-50"></i>
+                    <span class="menu-title" data-i18n="Category Manager">Blog Menu</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item @if(url('/blog/show') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/blog/show')}}">
+                            <i class="bx bxs-navigation mr-50"></i>
+                            <span class="menu-title">Show Blog</span>
+                        </a>
+                    </li>
 
-                        <li class="nav-item @if(url('/blog/create') == Request::url()) active @endif">
-                            <a class="nav-hover" href="{{ url('/blog/create') }}">
-                                <i class="bx bx-add-to-queue mr-50"></i>
-                                <span class="menu-title">Create Blog</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-{{--            @endif--}}
+                    <li class="nav-item @if(url('/blog/create') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/blog/create') }}">
+                            <i class="bx bx-add-to-queue mr-50"></i>
+                            <span class="menu-title">Create Blog</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 {{--            End Blog Menu--}}
 
             <!-- Restaurant Menu Start -->

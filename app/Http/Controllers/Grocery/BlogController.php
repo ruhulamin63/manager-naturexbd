@@ -79,16 +79,18 @@ class BlogController extends Controller
     public function store(Request $request)
     {
 //        dd($request->all());
-        $data = $request->validate([
 
-            'title' => ['required'],
-            'blog_description' => ['required'],
-            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-        ]);
+        if ($this->isLoggedIn($request)) {
+            if ($this->hasPermission($request, 'blog_create')) {
 
-//        if ($this->isLoggedIn($request)) {
-//            if ($this->hasPermission($request, 'blog_create')) {
+                $data = $request->validate([
+
+                    'title' => ['required'],
+                    'blog_description' => ['required'],
+                    'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+                ]);
 //                $validator = Validator::make($request->all(), [
 //                    'title' => 'required',
 //                    'slug' => 'required',
@@ -156,12 +158,12 @@ class BlogController extends Controller
                         'message' => 'Create successfully.'
                     ]);
 //                }
-//            } else {
-//                return redirect(url('/dashboard/page/unauthorized'));
-//            }
-//        } else {
-//            return redirect(url('/dashboard/signin'));
-//        }
+            } else {
+                return redirect(url('/dashboard/page/unauthorized'));
+            }
+        } else {
+            return redirect(url('/dashboard/signin'));
+        }
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grocery\Admin;
 use App\Models\Grocery\Category;
 use App\Models\Grocery\City;
+use App\Models\grocery\ProductMultiImage;
 use App\Models\Grocery\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,7 +55,6 @@ class ProductController extends Controller
                     'trade_price' => 'required',
                     'product_price' => 'required',
                     'product_description' => 'required',
-                    'product_thumbnail' => 'required',
                     'product_type' => 'required',
                     'measuring_unit_new'=>'required'
                 ]);
@@ -74,15 +74,15 @@ class ProductController extends Controller
                             ->where('product_name', $request->input('product_name'))
                             ->get();
                         if (count($existing) == 0) {
-                            if($imageURL == ""){
-                                $imageID = strtoupper(Str::random(6));
-                                $extension = request()->product_thumbnail->getClientOriginalExtension();
-                                $request->product_thumbnail->storeAs('public/temp', $imageID . '.' . $extension);
-                                $imageURL = 'public/temp/' . $imageID . '.' . $extension;
-                                Storage::disk('grocery_products')->put($imageID . '.' . $extension, Storage::get($imageURL));
-                                Storage::delete($imageURL);
-                                $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
-                            }
+//                            if($imageURL == ""){
+//                                $imageID = strtoupper(Str::random(6));
+//                                $extension = request()->product_thumbnail->getClientOriginalExtension();
+//                                $request->product_thumbnail->storeAs('public/temp', $imageID . '.' . $extension);
+//                                $imageURL = 'public/temp/' . $imageID . '.' . $extension;
+//                                Storage::disk('grocery_products')->put($imageID . '.' . $extension, Storage::get($imageURL));
+//                                Storage::delete($imageURL);
+//                                $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
+//                            }
 
                             $newProduct = new Products();
                             $newProduct->cityID = $city->id;
@@ -106,6 +106,23 @@ class ProductController extends Controller
                                 $newProduct->status = 'Active';
                             } else {
                                 $newProduct->status = 'Inactive';
+                            }
+
+                            if($request->file('attachment')){
+
+                                foreach ($request->attachment as $key => $file) {
+
+                                    $productMultiImage = new ProductMultiImage();
+
+
+                                    $name = '/app/grocery/products/multi-image/' . uniqid() . '.' . $file->getClientOriginalName();
+                                    $path = public_path('/app/grocery/products/multi-image/');
+                                    $file->move($path, $name);
+
+                                    $productMultiImage->image_path = $name;
+                                    $productMultiImage->best_practice_id = $newProduct->id;
+                                    $productMultiImage->save();
+                                }
                             }
                             $newProduct->save();
                         } else {

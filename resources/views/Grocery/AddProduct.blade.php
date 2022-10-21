@@ -105,9 +105,13 @@
                                             </div>
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail" required>
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>
+{{--                                                    <div class="custom-file">--}}
+{{--                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail" required>--}}
+{{--                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>--}}
+{{--                                                    </div>--}}
+
+                                                    <div class="dropzone" id="mydropzone">
+                                                        <input name="attachment[]"  type="file" multiple  style="display: none;"/>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -166,6 +170,11 @@
             }
         }
     </script>
+
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/bundles/dropzonejs/dropzone.css')}}">
+
+    <script type="application/javascript" src="{{asset('assets/bundles/dropzonejs/min/dropzone.min.js')}}"></script>
+    <script type="application/javascript" src="{{asset('assets/js/page/multiple-upload.js')}}"></script>
 
 </body>
 @endsection

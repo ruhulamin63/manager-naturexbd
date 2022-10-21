@@ -112,16 +112,5 @@
         CKEDITOR.replace( 'blog_description' );
     </script>
 
-    <script>
-        function offerProduct() {
-            if ($("#product_type").val() == "3") {
-                $('.product_old_price_for_offer').show();
-
-            }else{
-                $('.product_old_price_for_offer').hide();
-            }
-        }
-    </script>
-
     </body>
 @endsection
