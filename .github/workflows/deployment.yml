@@ -2,7 +2,7 @@ name: 🚀 Deploy website on Staging/Demo Server
 on:
   push:
     branches: [master]
-obs:
+jobs:
   deploy:
     name: 🚀 Deploy website every commit
     runs-on: ubuntu-latest
@@ -13,12 +13,14 @@ obs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 🚚 Executing Git Pull on Server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      - name: 📂 Sync files
+        uses: ./
         with:
           server: ${{ secrets.server_host }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
+
+          server-dir: /public_html/naturexmanager/
 
 
 
