@@ -13,8 +13,9 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 📂 Sync files
-        uses: ./
+
+      - name: Upload result to GitHub Code Scanning
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.server_host }}
           username: ${{ secrets.ftp_username }}
