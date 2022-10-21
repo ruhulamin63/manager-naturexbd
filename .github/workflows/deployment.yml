@@ -10,14 +10,15 @@ obs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
 
+      - name: 📦 Install dependencies
+        run: npm install
 
-      - name: 📂 Sync files
-        uses: ./
+      - name: 🚚 Executing Git Pull on Server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.server_host }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /public_html/naturexmanager/
 
 
 
