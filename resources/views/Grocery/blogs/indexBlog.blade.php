@@ -75,7 +75,7 @@
                                                     </td>
                                                     @if($item->image_path)
                                                         <td>
-                                                            <img src="{{ asset('/storage/'.$item->image_path) }}" width="80px" alt="blog image" style="border: 1px solid #000000;" />
+                                                            <img src="{{ asset('/storage'.$item->image_path) }}" width="80px" alt="blog image" style="border: 1px solid #000000;" />
                                                         </td>
                                                     @else
                                                         <td style="color: #96271A">
@@ -96,7 +96,7 @@
 
                                                     @if($item->video_path)
                                                         <td>
-                                                            <iframe src="{{ asset('/storage/'.$item->video_path) }}" height="80px" width="200px" alt="blog video" style="border: 1px solid #000000;"></iframe>
+                                                            <iframe src="{{ asset('/storage'.$item->video_path) }}" height="80px" width="200px" alt="blog video" style="border: 1px solid #000000;"></iframe>
                                                         </td>
                                                     @else
                                                         <td style="color: #96271A">
