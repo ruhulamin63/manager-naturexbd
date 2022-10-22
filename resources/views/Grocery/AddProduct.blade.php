@@ -99,19 +99,21 @@
                                             </div>
 
                                             <div class="col-12 col-sm-12">
+                                                <label>Description</label>
                                                 <fieldset class="form-group">
                                                     <textarea class="form-control" name="product_description" id="basicTextarea" rows="3" placeholder="Product Description" required></textarea>
                                                 </fieldset>
                                             </div>
                                             <div class="col-12 col-sm-12">
+                                                <label>Choose product multiple images</label>
                                                 <fieldset class="form-group">
 {{--                                                    <div class="custom-file">--}}
 {{--                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail" required>--}}
 {{--                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>--}}
 {{--                                                    </div>--}}
 
-                                                    <div class="dropzone" id="mydropzone">
-                                                        <input name="attachment[]"  type="file" multiple  style="display: none;"/>
+                                                    <div class="dropzone" id="document-dropzone">
+{{--                                                        <input name="product_thumbnail[]" type="file" multiple  style="display: none;"/>--}}
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -171,10 +173,36 @@
         }
     </script>
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/bundles/dropzonejs/dropzone.css')}}">
-
-    <script type="application/javascript" src="{{asset('assets/bundles/dropzonejs/min/dropzone.min.js')}}"></script>
-    <script type="application/javascript" src="{{asset('assets/js/page/multiple-upload.js')}}"></script>
+    <script>
+        let uploadedDocumentMap = {};
+        Dropzone.autoDiscover = false;
+        let myDropzone = new Dropzone("div#document-dropzone",{
+            url: '{{ route('uploadImageViaAjax') }}',
+            autoProcessQueue: true,
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            parallelUploads: 10,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            successmultiple: function(data, response) {
+                $.each(response['name'], function (key, val) {
+                    $('form').append('<input type="hidden" name="images[]" value="' + val + '">');
+                    uploadedDocumentMap[data[key].name] = val;
+                });
+            },
+            removedfile: function (file) {
+                file.previewElement.remove()
+                let name = '';
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name;
+                } else {
+                    name = uploadedDocumentMap[file.name];
+                }
+                $('form').find('input[name="images[]"][value="' + name + '"]').remove()
+            }
+        });
+    </script>
 
 </body>
 @endsection

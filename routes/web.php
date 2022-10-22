@@ -110,8 +110,8 @@ Route::post('/blog/status/update', [BlogController::class, 'blogStatusUpdate'])-
 Route::get('/grocery/products', 'Grocery\RouteController@products');
 Route::get('/grocery/products/regenerate', 'Grocery\ProductController@regenerateProducts');
 Route::get('/grocery/products/add', 'Grocery\RouteController@addProduct');
-
-
+//multiple image upload
+Route::post('upload-image-via-ajax', 'Grocery\ProductController@uploadImageViaAjax')->name('uploadImageViaAjax');
 
 Route::post('/grocery/products/create', 'Grocery\ProductController@createProduct');
 Route::get('/grocery/products/edit', 'Grocery\RouteController@editProduct');

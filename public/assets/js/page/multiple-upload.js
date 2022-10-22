@@ -6,8 +6,9 @@ if (window.Dropzone) {
 }
 
 var dropzone = new Dropzone("#mydropzone", {
-  url: "#"
+  url: "{{ url('/grocery/products/create') }}"
 });
+
 
 var minSteps = 6,
   maxSteps = 60,
@@ -20,7 +21,8 @@ dropzone.uploadFiles = function (files) {
   for (var i = 0; i < files.length; i++) {
 
     var file = files[i];
-    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+      let totalSteps;
+      totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
 
     for (var step = 0; step < totalSteps; step++) {
       var duration = timeBetweenSteps * (step + 1);

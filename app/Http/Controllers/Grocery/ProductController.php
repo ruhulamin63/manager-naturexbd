@@ -42,12 +42,35 @@ class ProductController extends Controller
         // return true;
     }
 
+
+//add image to the storage disk.
+    public function uploadImageViaAjax(Request $request)
+    {
+        $name = [];
+        $original_name = [];
+        foreach ($request->file('file') as $key => $value) {
+            $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+            $destinationPath = public_path().'/multiple-image/images/';
+            $value->move($destinationPath, $image);
+            $name[] = $image;
+            $original_name[] = $value->getClientOriginalName();
+        }
+
+        return response()->json([
+            'name'          => $name,
+            'original_name' => $original_name
+        ]);
+    }
+
     public function createProduct(Request $request)
     {
-//        return $request->all();
+
 
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'add_product')) {
+
+//                dd($request->all());
+
                 $validator = Validator::make($request->all(), [
                     'city_coverage' => 'required',
                     'product_name' => 'required',
@@ -56,7 +79,7 @@ class ProductController extends Controller
                     'product_price' => 'required',
                     'product_description' => 'required',
                     'product_type' => 'required',
-                    'measuring_unit_new'=>'required'
+                    'measuring_unit_new'=>'required',
                 ]);
 
                 if ($validator->fails()) {
@@ -107,24 +130,27 @@ class ProductController extends Controller
                             } else {
                                 $newProduct->status = 'Inactive';
                             }
-
-                            if($request->file('attachment')){
-
-                                foreach ($request->attachment as $key => $file) {
-
-                                    $productMultiImage = new ProductMultiImage();
-
-
-                                    $name = '/app/grocery/products/multi-image/' . uniqid() . '.' . $file->getClientOriginalName();
-                                    $path = public_path('/app/grocery/products/multi-image/');
-                                    $file->move($path, $name);
-
-                                    $productMultiImage->image_path = $name;
-                                    $productMultiImage->best_practice_id = $newProduct->id;
-                                    $productMultiImage->save();
-                                }
-                            }
                             $newProduct->save();
+
+                            //======================================
+//                            $messages = array(
+//                                'images.required' => 'Image is Required.'
+//                            );
+//                            $this->validate($request, array(
+//                                'images' => 'required|array|min:1',
+//                            ),$messages);
+
+//                            dd($request->images);
+                            foreach ($request->images as $image) {
+                                $productMultiImage = new ProductMultiImage();
+                                $productMultiImage->product_id = $newProduct->id;
+                                $productMultiImage->image_path = $image;
+                                $productMultiImage->status = 'Active';
+                                $productMultiImage->save();
+//                                dd($productMultiImage);
+                            }
+                            //======================================
+//                            dd('ok');
                         } else {
                             return redirect()->back()->with([
                                 'error' => true,
