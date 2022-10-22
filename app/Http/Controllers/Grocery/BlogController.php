@@ -51,7 +51,7 @@ class BlogController extends Controller
         $cityList = City::all();
         $blogList = Blog::orderBy('id', 'DESC')->get();
 
-        return view('grocery.blogs.indexBlog', compact('blogList'))
+        return view('Grocery.blogs.indexBlog', compact('blogList'))
             ->with('title', 'Blog')
             ->with('cityList', $cityList);
     }
@@ -65,7 +65,7 @@ class BlogController extends Controller
     {
         $cityList = City::all();
 
-        return view('grocery.blogs.createBlog')
+        return view('Grocery.blogs.createBlog')
             ->with('title', 'Create Blog')
             ->with('cityList', $cityList);
     }
@@ -181,7 +181,7 @@ class BlogController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -190,7 +190,7 @@ class BlogController extends Controller
 
 //        dd($blogData);
 
-        return view('grocery.blogs.editBlog', compact('blogData'))
+        return view('Grocery.blogs.editBlog', compact('blogData'))
             ->with('title', 'Edit Blog')
             ->with('cityList', $cityList);
     }
@@ -200,7 +200,7 @@ class BlogController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
