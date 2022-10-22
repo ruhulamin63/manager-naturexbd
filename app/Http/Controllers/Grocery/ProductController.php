@@ -49,22 +49,21 @@ class ProductController extends Controller
         $name = [];
         $original_name = [];
         foreach ($request->file('file') as $key => $value) {
-            $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-            $destinationPath = public_path().'/multiple-image/images/';
-            $value->move($destinationPath, $image);
-            $name[] = $image;
-            $original_name[] = $value->getClientOriginalName();
+            $destinationPath = '/multiple-product-image/images/' . uniqid() . '.' . $value->extension();
+            $value->storePubliclyAs('public', $destinationPath);
+            $name[] = $destinationPath;
         }
 
-        return response()->json([
-            'name'          => $name,
-            'original_name' => $original_name
-        ]);
+//        dd($name);
+        return response()->json(['name' => $name, 'original_name' => $original_name]);
+//        return response()->json([
+//            'name'          => $name,
+//            'original_name' => $original_name
+//        ]);
     }
 
     public function createProduct(Request $request)
     {
-
 
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'add_product')) {
@@ -96,6 +95,8 @@ class ProductController extends Controller
                             ->where('cityID', $city->id)
                             ->where('product_name', $request->input('product_name'))
                             ->get();
+                        dd($existing);
+
                         if (count($existing) == 0) {
 //                            if($imageURL == ""){
 //                                $imageID = strtoupper(Str::random(6));
@@ -140,15 +141,17 @@ class ProductController extends Controller
 //                                'images' => 'required|array|min:1',
 //                            ),$messages);
 
+
 //                            dd($request->images);
-                            foreach ($request->images as $image) {
-                                $productMultiImage = new ProductMultiImage();
-                                $productMultiImage->product_id = $newProduct->id;
-                                $productMultiImage->image_path = $image;
-                                $productMultiImage->status = 'Active';
-                                $productMultiImage->save();
-//                                dd($productMultiImage);
-                            }
+
+//                            foreach ($request->images as $image) {
+//                                $productMultiImage = new ProductMultiImage();
+//                                $productMultiImage->product_id = $newProduct->id;
+//                                $productMultiImage->image_path = $image;
+//                                $productMultiImage->status = 'Active';
+//                                $productMultiImage->save();
+////                                dd($productMultiImage);
+//                            }
                             //======================================
 //                            dd('ok');
                         } else {
