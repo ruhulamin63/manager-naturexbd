@@ -11,6 +11,7 @@ use App\Models\Grocery\City;
 use App\Models\Grocery\Leads;
 use App\Models\Grocery\LoginReport;
 use App\Models\Grocery\Order;
+use App\Models\grocery\ProductMultiImage;
 use App\Models\Grocery\Products;
 use App\Models\Grocery\Users;
 use App\Models\MangoLeads;
@@ -512,14 +513,19 @@ class RouteController extends Controller
                                 $index++;
                             }
                         }
-                        $productList = Products::select('*')
-                            ->where('cityID', $request->input('city'))->get();
+//                        $productList = Products::select('*')
+//                            ->where('cityID', $request->input('city'))->get();
+                        $productList = Products::orderBy('id', 'desc')->get();
+                        $productListImages = ProductMultiImage::orderBy('id', 'desc')->get();
+
                         return view('Grocery.ProductManager')
                             ->with('title', 'Products | Grocery')
                             ->with('date', date('d-M-Y'))
                             ->with('cityList', $cityList)
                             ->with('productList', $productList)
-                            ->with('cityID', $request->input('city'))
+                            ->with('productListImages', $productListImages)
+//                            ->with('cityID', $request->input('city'))
+                            ->with('cityID', 1)
                             ->with('categoryList', $category);
                     } else {
                         return redirect(url('/dashboard/page/unauthorized'));

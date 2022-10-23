@@ -45,22 +45,24 @@
                         @php
                         $permission = \App\Models\Grocery\Admin::select('*')->where('email', session()->get('GR_MANAGER_EMAIL'))->get();
                         $permission = $permission[0];
-                        @endphp
-                        @if(strpos($permission, 'regenerate_product') !== false)
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12" style="margin-top: 10px">
-                                            <a href="{{ url('/grocery/products/regenerate?id=' . $cityID) }}">
-                                                <button type="button" class="btn btn-block btn-success glow">Regenrate Products</button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+//                        @endphp
+
+{{--                        @if(strpos($permission, 'regenerate_product') !== false)--}}
+{{--                            <div class="card">--}}
+{{--                                <div class="card-content">--}}
+{{--                                    <div class="card-body">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-12 col-sm-12" style="margin-top: 10px">--}}
+{{--                                                <a href="{{ url('/grocery/products/regenerate?id=' . $cityID) }}">--}}
+{{--                                                    <button type="button" class="btn btn-block btn-success glow">Regenrate Products</button>--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+
                     </div>
                     <div class="restaurant-list-table">
                         <div class="card">
@@ -72,10 +74,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>SN</th>
-{{--                                                    <th>Thumbnail</th>--}}
+                                                    <th>Images</th>
                                                     <th>Product Info</th>
+                                                    <th>Category</th>
                                                     <th>Trade Price</th>
                                                     <th>Retail Price</th>
+                                                    <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
@@ -83,42 +87,47 @@
                                                 @foreach($productList as $key => $item)
                                                 <tr>
                                                     <td>{{ $key+1 }}</td>
-{{--                                                    <td>--}}
-{{--                                                        <img src="{{ url($item->product_thumbnail) }}" width="80px" alt="product_thumbnail" style="border: 1px solid #000000;" />--}}
-{{--                                                    </td>--}}
+                                                    <td>
+                                                        @foreach($productListImages as $image)
+                                                            @if($image->product_id == $item->id)
+                                                                <img src="{{ asset('/storage'.$image->image_path) }}" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
                                                     <td>
                                                         {{ $item->product_name }}
                                                         <br>
-                                                        <small>{{ $item->product_description }}</small>
-                                                        <br>
-                                                        <small><b>Category:</b> {{ $item->category }}</small>
-                                                        <br><br>
-                                                        <small><b>Created at:</b> {{ date('d M Y h:i:s A', strtotime($item->created_at)) }}</small>
-                                                        <br>
-                                                        <small><b>Modified at:</b> {{ date('d M Y h:i:s A', strtotime($item->updated_at)) }}</small>
+                                                        <small>{{ $item->product_description }}</small>>
+{{--                                                        <small><b>Created at:</b> {{ date('d M Y h:i:s A', strtotime($item->created_at)) }}</small>--}}
+{{--                                                        <br>--}}
+{{--                                                        <small><b>Modified at:</b> {{ date('d M Y h:i:s A', strtotime($item->updated_at)) }}</small>--}}
                                                     </td>
+                                                    <td>{{ $item->category }}</td>
                                                     <td>৳{{ number_format($item->trade_price, 2) }}</td>
                                                     <td>৳{{ number_format($item->product_price, 2) }}</td>
-                                                    <td class="text-center">
+                                                    <td>
                                                         @if($item->status == "Active")
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="Inactive" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
-                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
-                                                        </div>
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
+                                                                <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="Inactive" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
                                                         @else
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
-                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="Active" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
-                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
-                                                        </div>
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
+                                                                <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="Active" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
                                                         @endif
-                                                        <br>
+                                                    </td>
+
+                                                    <td class="text-center">
                                                         @if(strpos($permission, 'edit_product') !== false)
-                                                        <a href="{{ url('/grocery/products/edit?id=' . $item->id) }}">
-                                                            <div class="badge badge-pill badge-secondary mb-1 round-cursor">Edit</div>
-                                                        </a>
+                                                            <a href="{{ url('/grocery/products/edit?id=' . $item->id) }}">
+                                                                <div class="badge badge-pill badge-secondary mb-1 round-cursor">Edit</div>
+                                                            </a>
                                                         @endif
                                                         @if(strpos($permission, 'update_product_category') !== false)
-                                                        <div class="badge badge-pill badge-warning round-cursor" onclick="updateCategory('{{ $item->product_name }}','{{ $item->category }}')">Change<br>Category</div>
+                                                            <br />
+                                                            <button class="badge badge-pill badge-primary mb-1 round-cursor" onclick="updateCategory('{{ $item->product_name }}','{{ $item->category }}')">Change</button>
                                                         @endif
                                                     </td>
                                                 </tr>

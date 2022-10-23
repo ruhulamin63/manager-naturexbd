@@ -135,7 +135,7 @@
                                                 </ul>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
-                                                <button type="submit" class="btn btn-block btn-success glow">Add</button>
+                                                <button type="submit" class="btn btn-block btn-success glow">Create Product</button>
                                             </div>
                                         </div>
                                     </form>

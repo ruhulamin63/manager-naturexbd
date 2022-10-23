@@ -97,10 +97,11 @@
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">
                                                 <label>Product Image</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>
-                                                    </div>
+{{--                                                    <div class="custom-file">--}}
+{{--                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail">--}}
+{{--                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>--}}
+{{--                                                    </div>--}}
+                                                    <div class="dropzone" id="document-dropzone"></div>
                                                 </fieldset>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
@@ -128,6 +129,37 @@
 
     <script>
           CKEDITOR.replace( 'product_description' );
+    </script>
+
+    <script>
+        let uploadedDocumentMap = {};
+        Dropzone.autoDiscover = false;
+        let myDropzone = new Dropzone("div#document-dropzone",{
+            url: '{{ route('uploadImageViaAjax') }}',
+            autoProcessQueue: true,
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            parallelUploads: 10,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            successmultiple: function(data, response) {
+                $.each(response['name'], function (key, val) {
+                    $('form').append('<input type="hidden" name="images[]" value="' + val + '">');
+                    uploadedDocumentMap[data[key].name] = val;
+                });
+            },
+            removedfile: function (file) {
+                file.previewElement.remove()
+                let name = '';
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name;
+                } else {
+                    name = uploadedDocumentMap[file.name];
+                }
+                $('form').find('input[name="images[]"][value="' + name + '"]').remove()
+            }
+        });
     </script>
 
 </body>

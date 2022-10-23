@@ -43,7 +43,7 @@ class ProductController extends Controller
     }
 
 
-//add image to the storage disk.
+    //add image to the storage disk.
     public function uploadImageViaAjax(Request $request)
     {
         $name = [];
@@ -713,6 +713,7 @@ class ProductController extends Controller
                         Storage::delete($imageURL);
                         $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
 
+
                         Products::where('product_name', $currentData[0]->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description'),
@@ -728,6 +729,21 @@ class ProductController extends Controller
                             'meta_keywords' => $request->input('meta_keywords')
                         ]);
                     } else {
+
+                        $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->get();
+//                        dd($MultipleImage);
+                        foreach ($MultipleImage as $image) {
+                            $path = public_path() . $image->image_path;
+                            if (file_exists($path)){
+                                unlink($path);
+                            }
+                        }
+                        //update multi image model
+//                        ProductMultiImage::where('product_id', $request->input('product_id'))->update([
+//                            'product_name' => $request->input('product_name'),
+//                            'product_description' => $request->input('product_description')
+//                        ]);
+
                         Products::where('product_name', $currentData[0]->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description')
@@ -761,8 +777,6 @@ class ProductController extends Controller
             ]);
         }
     }
-
-
 
     public function editCategory(Request $request)
     {
@@ -1001,6 +1015,9 @@ class ProductController extends Controller
             $id = $request->input('id');
             $category = $request->input('category');
             $productDetails = Products::select('*')->where('id', $id)->get();
+
+            dd($productDetails);
+
             foreach ($productDetails as $key => $product) {
                 $productDetails[$key]['product_thumbnail'] = url($product->product_thumbnail);
             }
