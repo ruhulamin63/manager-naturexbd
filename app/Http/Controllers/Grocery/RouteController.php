@@ -51,6 +51,31 @@ class RouteController extends Controller
         // return true;
     }
 
+
+    //=======================Ruhul==========================
+//    public function addBlog(Request $request)
+//    {
+//        if ($this->isLoggedIn($request)) {
+//            if ($this->hasPermission($request, 'add_product')) {
+//                $category = Category::all();
+//                $categoryList = $category->unique('category');
+//                $cityList = City::all();
+//                return view('Grocery.AddProduct')
+//                    ->with('title', 'Products | Grocery')
+//                    ->with('date', date('d-M-Y'))
+//                    ->with('cityList', $cityList)
+//                    ->with('categoryList', $categoryList);
+//            } else {
+//                return redirect(url('/dashboard/page/unauthorized'));
+//            }
+//        } else {
+//            return redirect(url('/dashboard/signin'));
+//        }
+//    }
+
+    //=======================Ruhul==========================
+
+
     private function getDeliveryCharge($city, $price)
     {
         $deliveryCharge = 0;

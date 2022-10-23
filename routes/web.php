@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Grocery\BlogController;
+use App\Http\Controllers\v1\RouteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -97,6 +98,7 @@ Route::post('/grocery/category/prePayment/update', 'Grocery\CategoryController@c
 
 
 //start writing by Ruhul
+Route::get('/blog/show', [RouteController::class, 'addBlog']);
 Route::get('/blog/show',[BlogController::class, 'index'])->name('blog.show');
 Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
 Route::post('/blog/store',[BlogController::class, 'store'])->name('blog.store');

@@ -1,0 +1,16 @@
+Message
+You have chosen to subscribe to the topic arn:aws:sns:ap-southeast-1:797962984373:bpt_01791865233.
+To confirm the subscription, visit the SubscribeURL included in this message.
+MessageId
+bf2cbd9f-3751-44de-afce-2752347d9aab
+SubscribeURL
+https://sns.ap-southeast-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:ap-southeast-1:797962984373:bpt_01791865233&Token=2336412f37fb687f5d51e6e2425f004aee4aa29d4ec8216af5661a7973c4003042050c9008a3f2917ba21b70d03409e453325bd8984499bad47486bb718b81b3ce9ab4a554dff7a57b121a7bb0856474f359c5163205a23e60483be43422625b1f2fc092a010a2fb56024d3741733a92a3c4be54ccd37cedecef56904025a1db
+Timestamp
+2020-07-02T05:59:06.815Z
+Token
+2336412f37fb687f5d51e6e2425f004aee4aa29d4ec8216af5661a7973c4003042050c9008a3f2917ba21b70d03409e453325bd8984499bad47486bb718b81b3ce9ab4a554dff7a57b121a7bb0856474f359c5163205a23e60483be43422625b1f2fc092a010a2fb56024d3741733a92a3c4be54ccd37cedecef56904025a1db
+TopicArn
+arn:aws:sns:ap-southeast-1:797962984373:bpt_01791865233
+Type
+SubscriptionConfirmation
+
