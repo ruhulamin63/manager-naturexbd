@@ -95,7 +95,8 @@ class ProductController extends Controller
                             ->where('cityID', $city->id)
                             ->where('product_name', $request->input('product_name'))
                             ->get();
-                        dd($existing);
+
+//                        dd(count($existing));
 
                         if (count($existing) == 0) {
 //                            if($imageURL == ""){
