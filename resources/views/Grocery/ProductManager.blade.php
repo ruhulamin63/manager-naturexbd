@@ -72,7 +72,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>SN</th>
-                                                    <th>Thumbnail</th>
+{{--                                                    <th>Thumbnail</th>--}}
                                                     <th>Product Info</th>
                                                     <th>Trade Price</th>
                                                     <th>Retail Price</th>
@@ -83,9 +83,9 @@
                                                 @foreach($productList as $key => $item)
                                                 <tr>
                                                     <td>{{ $key+1 }}</td>
-                                                    <td>
-                                                        <img src="{{ url($item->product_thumbnail) }}" width="80px" alt="product_thumbnail" style="border: 1px solid #000000;" />
-                                                    </td>
+{{--                                                    <td>--}}
+{{--                                                        <img src="{{ url($item->product_thumbnail) }}" width="80px" alt="product_thumbnail" style="border: 1px solid #000000;" />--}}
+{{--                                                    </td>--}}
                                                     <td>
                                                         {{ $item->product_name }}
                                                         <br>
