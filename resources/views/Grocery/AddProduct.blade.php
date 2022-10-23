@@ -112,9 +112,7 @@
 {{--                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>--}}
 {{--                                                    </div>--}}
 
-                                                    <div class="dropzone" id="document-dropzone">
-{{--                                                        <input name="product_thumbnail[]" type="file" multiple  style="display: none;"/>--}}
-                                                    </div>
+                                                    <div class="dropzone" id="document-dropzone"></div>
                                                 </fieldset>
                                             </div>
 
@@ -124,16 +122,16 @@
                                             <div class="col-12 col-sm-12 col-lg-8">
                                                 <p>Select City Coverage</p>
                                                 <ul class="list-unstyled mb-0">
-                                                    @foreach($cityList as $key => $item)
+{{--                                                    @foreach($cityList as $key => $item)--}}
                                                     <li class="d-inline-block mr-2 mb-1">
                                                         <fieldset>
                                                             <div class="checkbox">
                                                                 <input type="checkbox" class="checkbox-input" name="city_coverage[]" id="checkbox{{ $key }}" value="{{ $item->id }}">
-                                                                <label for="checkbox{{ $key }}">{{ $item->city_name }}</label>
+                                                                <label for="checkbox{{ $key }}">{{ $cityList[0]->city_name }}</label>
                                                             </div>
                                                         </fieldset>
                                                     </li>
-                                                    @endforeach
+{{--                                                    @endforeach--}}
                                                 </ul>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">

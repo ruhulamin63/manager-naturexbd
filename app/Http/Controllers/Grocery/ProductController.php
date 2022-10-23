@@ -56,15 +56,10 @@ class ProductController extends Controller
 
 //        dd($name);
         return response()->json(['name' => $name, 'original_name' => $original_name]);
-//        return response()->json([
-//            'name'          => $name,
-//            'original_name' => $original_name
-//        ]);
     }
 
     public function createProduct(Request $request)
     {
-
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'add_product')) {
 
@@ -89,10 +84,12 @@ class ProductController extends Controller
                 } else {
                     $cityCoverage = $request->input('city_coverage');
                     $cityList = City::all();
-                    $imageURL = "";
-                    foreach ($cityList as $city) {
+//                    dd($cityList[0]->id);
+
+//                    $imageURL = "";
+//                    foreach ($cityList as $city) {
                         $existing = Products::select('*')
-                            ->where('cityID', $city->id)
+                            ->where('cityID', $cityList[0]->id)
                             ->where('product_name', $request->input('product_name'))
                             ->get();
 
@@ -110,7 +107,7 @@ class ProductController extends Controller
 //                            }
 
                             $newProduct = new Products();
-                            $newProduct->cityID = $city->id;
+                            $newProduct->cityID = $cityList[0]->id;
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
                             $newProduct->trade_price = $request->input('trade_price');
@@ -124,10 +121,10 @@ class ProductController extends Controller
 
                             $newProduct->product_description = $request->input('product_description');
                             $newProduct->offer_old_price = $request->input('product_old_price');
-                            $newProduct->product_thumbnail = $imageURL;
+//                            $newProduct->product_thumbnail = $imageURL;
                             $newProduct->measuring_unit_new = $request->input('measuring_unit_new');;
 
-                            if (in_array($city->id, $cityCoverage)) {
+                            if (in_array($cityList[0]->id, $cityCoverage)) {
                                 $newProduct->status = 'Active';
                             } else {
                                 $newProduct->status = 'Inactive';
@@ -145,14 +142,14 @@ class ProductController extends Controller
 
 //                            dd($request->images);
 
-//                            foreach ($request->images as $image) {
-//                                $productMultiImage = new ProductMultiImage();
-//                                $productMultiImage->product_id = $newProduct->id;
-//                                $productMultiImage->image_path = $image;
-//                                $productMultiImage->status = 'Active';
-//                                $productMultiImage->save();
-////                                dd($productMultiImage);
-//                            }
+                            foreach ($request->images as $image) {
+                                $productMultiImage = new ProductMultiImage();
+                                $productMultiImage->product_id = $newProduct->id;
+                                $productMultiImage->image_path = $image;
+                                $productMultiImage->status = 'Active';
+                                $productMultiImage->save();
+//                                dd($productMultiImage);
+                            }
                             //======================================
 //                            dd('ok');
                         } else {
@@ -161,7 +158,7 @@ class ProductController extends Controller
                                 'message' => 'Product already esxists under current city.'
                             ]);
                         }
-                    }
+//                    }
                     return redirect()->back()->with([
                         'error' => false,
                         'message' => 'Product added successfully.'
