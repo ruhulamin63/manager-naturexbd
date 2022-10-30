@@ -43,29 +43,23 @@ class ProductController extends Controller
     }
 
 
-//add image to the storage disk.
+    //add image to the storage disk.
     public function uploadImageViaAjax(Request $request)
     {
         $name = [];
         $original_name = [];
         foreach ($request->file('file') as $key => $value) {
-            $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-            $destinationPath = public_path().'/multiple-image/images/';
-            $value->move($destinationPath, $image);
-            $name[] = $image;
-            $original_name[] = $value->getClientOriginalName();
+            $destinationPath = '/multiple-product-image/images/' . uniqid() . '.' . $value->extension();
+            $value->storePubliclyAs('public', $destinationPath);
+            $name[] = $destinationPath;
         }
 
-        return response()->json([
-            'name'          => $name,
-            'original_name' => $original_name
-        ]);
+//        dd($name);
+        return response()->json(['name' => $name, 'original_name' => $original_name]);
     }
 
     public function createProduct(Request $request)
     {
-
-
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'add_product')) {
 
@@ -90,12 +84,17 @@ class ProductController extends Controller
                 } else {
                     $cityCoverage = $request->input('city_coverage');
                     $cityList = City::all();
-                    $imageURL = "";
-                    foreach ($cityList as $city) {
+//                    dd($cityList[0]->id);
+
+//                    $imageURL = "";
+//                    foreach ($cityList as $city) {
                         $existing = Products::select('*')
-                            ->where('cityID', $city->id)
+                            ->where('cityID', $cityList[0]->id)
                             ->where('product_name', $request->input('product_name'))
                             ->get();
+
+//                        dd(count($existing));
+
                         if (count($existing) == 0) {
 //                            if($imageURL == ""){
 //                                $imageID = strtoupper(Str::random(6));
@@ -108,7 +107,7 @@ class ProductController extends Controller
 //                            }
 
                             $newProduct = new Products();
-                            $newProduct->cityID = $city->id;
+                            $newProduct->cityID = $cityList[0]->id;
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
                             $newProduct->trade_price = $request->input('trade_price');
@@ -122,10 +121,10 @@ class ProductController extends Controller
 
                             $newProduct->product_description = $request->input('product_description');
                             $newProduct->offer_old_price = $request->input('product_old_price');
-                            $newProduct->product_thumbnail = $imageURL;
+//                            $newProduct->product_thumbnail = $imageURL;
                             $newProduct->measuring_unit_new = $request->input('measuring_unit_new');;
 
-                            if (in_array($city->id, $cityCoverage)) {
+                            if (in_array($cityList[0]->id, $cityCoverage)) {
                                 $newProduct->status = 'Active';
                             } else {
                                 $newProduct->status = 'Inactive';
@@ -140,7 +139,9 @@ class ProductController extends Controller
 //                                'images' => 'required|array|min:1',
 //                            ),$messages);
 
+
 //                            dd($request->images);
+
                             foreach ($request->images as $image) {
                                 $productMultiImage = new ProductMultiImage();
                                 $productMultiImage->product_id = $newProduct->id;
@@ -157,7 +158,7 @@ class ProductController extends Controller
                                 'message' => 'Product already esxists under current city.'
                             ]);
                         }
-                    }
+//                    }
                     return redirect()->back()->with([
                         'error' => false,
                         'message' => 'Product added successfully.'
@@ -712,6 +713,7 @@ class ProductController extends Controller
                         Storage::delete($imageURL);
                         $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
 
+
                         Products::where('product_name', $currentData[0]->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description'),
@@ -727,6 +729,21 @@ class ProductController extends Controller
                             'meta_keywords' => $request->input('meta_keywords')
                         ]);
                     } else {
+
+                        $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->get();
+//                        dd($MultipleImage);
+                        foreach ($MultipleImage as $image) {
+                            $path = public_path() . $image->image_path;
+                            if (file_exists($path)){
+                                unlink($path);
+                            }
+                        }
+                        //update multi image model
+//                        ProductMultiImage::where('product_id', $request->input('product_id'))->update([
+//                            'product_name' => $request->input('product_name'),
+//                            'product_description' => $request->input('product_description')
+//                        ]);
+
                         Products::where('product_name', $currentData[0]->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description')
@@ -760,8 +777,6 @@ class ProductController extends Controller
             ]);
         }
     }
-
-
 
     public function editCategory(Request $request)
     {
@@ -1000,6 +1015,9 @@ class ProductController extends Controller
             $id = $request->input('id');
             $category = $request->input('category');
             $productDetails = Products::select('*')->where('id', $id)->get();
+
+            dd($productDetails);
+
             foreach ($productDetails as $key => $product) {
                 $productDetails[$key]['product_thumbnail'] = url($product->product_thumbnail);
             }
