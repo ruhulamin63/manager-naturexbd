@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grocery\Admin;
 use App\Models\Grocery\Category;
 use App\Models\Grocery\City;
-use App\Models\grocery\ProductMultiImage;
+use App\Models\Grocery\ProductMultiImage;
 use App\Models\Grocery\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
