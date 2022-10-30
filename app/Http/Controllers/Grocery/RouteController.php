@@ -11,7 +11,7 @@ use App\Models\Grocery\City;
 use App\Models\Grocery\Leads;
 use App\Models\Grocery\LoginReport;
 use App\Models\Grocery\Order;
-use App\Models\grocery\ProductMultiImage;
+use App\Models\Grocery\ProductMultiImage;
 use App\Models\Grocery\Products;
 use App\Models\Grocery\Users;
 use App\Models\MangoLeads;
