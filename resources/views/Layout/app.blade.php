@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Rafat Hossain">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title }} | Khaidai Today</title>
+    <title>{{ $title }} | Naturex</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/favicon/favicon2.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
