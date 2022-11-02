@@ -74,7 +74,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>SN</th>
-                                                    <th>Images</th>
+                                                    <th>Base Image</th>
+                                                    <th>Multi-Images</th>
                                                     <th>Product Info</th>
                                                     <th>Category</th>
                                                     <th>Trade Price</th>
@@ -87,6 +88,9 @@
                                                 @foreach($productList as $key => $item)
                                                 <tr>
                                                     <td>{{ $key+1 }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('/storage'.$item->product_thumbnail) }}" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
+                                                    </td>
                                                     <td>
                                                         @foreach($productListImages as $image)
                                                             @if($image->product_id == $item->id)
