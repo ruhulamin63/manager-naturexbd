@@ -99,7 +99,7 @@ class ProductController extends Controller
 //                            if($imageURL == ""){
 //                                $imageID = strtoupper(Str::random(6));
 //                                $extension = request()->product_thumbnail->getClientOriginalExtension();
-//                                $request->product_thumbnail->storeAs('public/temp', $imageID . '.' . $extension);
+//                                $request->product_thumbnail->storeAs('storage/temp', $imageID . '.' . $extension);
 //                                $imageURL = 'public/temp/' . $imageID . '.' . $extension;
 //                                Storage::disk('grocery_products')->put($imageID . '.' . $extension, Storage::get($imageURL));
 //                                Storage::delete($imageURL);
@@ -107,6 +107,16 @@ class ProductController extends Controller
 //                            }
 
                             $newProduct = new Products();
+
+                            if(file($request->product_thumbnail)){
+                                $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
+                                $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
+                                $newProduct->product_thumbnail = $destinationPath;
+                            }
+
+//                            dd($newProduct->product_thumbnail);
+
+
                             $newProduct->cityID = $cityList[0]->id;
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
