@@ -205,6 +205,8 @@
     @include('Layout_Grocery.scripts')
 
     <script>
+        import Swal from "laravel-mix/src/Dispatcher";
+
         function statusUpdate(product_id, item, city_id) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "Active") {

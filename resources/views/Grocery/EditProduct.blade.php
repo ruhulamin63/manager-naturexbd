@@ -94,13 +94,17 @@
                                                     <textarea class="form-control" name="product_description" id="basicTextarea" rows="3" placeholder="Product Description" required>{{ $productDetails->product_description }}</textarea>
                                                 </fieldset>
                                             </div>
+
+                                            <div class="col-12 col-sm-12">
+                                                <label>Base Image For Specific Product</label>
+                                                <fieldset class="form-group">
+                                                    <input type="file" class="form-control-file" name="product_thumbnail" id="product_thumbnail" required>
+                                                </fieldset>
+                                            </div>
+
                                             <div class="col-12 col-sm-12">
                                                 <fieldset class="form-group">
                                                 <label>Product Image</label>
-{{--                                                    <div class="custom-file">--}}
-{{--                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="product_thumbnail">--}}
-{{--                                                        <label class="custom-file-label" for="inputGroupFile02">Choose product image</label>--}}
-{{--                                                    </div>--}}
                                                     <div class="dropzone" id="document-dropzone"></div>
                                                 </fieldset>
                                             </div>

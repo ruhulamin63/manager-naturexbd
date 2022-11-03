@@ -712,18 +712,23 @@ class ProductController extends Controller
                     $currentData = Products::select('*')->where('id', $request->input('product_id'))->get();
                     if ($request->has('product_thumbnail')) {
                         $path = public_path() . $currentData[0]->product_thumbnail;
-                        if (file_exists($path)){
-                            unlink($path);
+//                        if (file_exists($path)){
+//                            unlink($path);
+//                        }
+//                        $imageID = strtoupper(Str::random(6));
+//                        $extension = request()->product_thumbnail->getClientOriginalExtension();
+//                        $request->product_thumbnail->storeAs('public/temp', $imageID . '.' . $extension);
+//                        $imageURL = 'public/temp/' . $imageID . '.' . $extension;
+//                        Storage::disk('grocery_products')->put($imageID . '.' . $extension, Storage::get($imageURL));
+//                        Storage::delete($imageURL);
+//                        $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
+
+                        $imageURL = "";
+                        if(file($request->product_thumbnail)){
+                            $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
+                            $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
+                            $imageURL = $destinationPath;
                         }
-                        $imageID = strtoupper(Str::random(6));
-                        $extension = request()->product_thumbnail->getClientOriginalExtension();
-                        $request->product_thumbnail->storeAs('public/temp', $imageID . '.' . $extension);
-                        $imageURL = 'public/temp/' . $imageID . '.' . $extension;
-                        Storage::disk('grocery_products')->put($imageID . '.' . $extension, Storage::get($imageURL));
-                        Storage::delete($imageURL);
-                        $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
-
-
                         Products::where('product_name', $currentData[0]->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description'),
@@ -739,6 +744,13 @@ class ProductController extends Controller
                             'meta_keywords' => $request->input('meta_keywords')
                         ]);
                     } else {
+
+                        $imageURL = "";
+                        if(file($request->product_thumbnail)){
+                            $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
+                            $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
+                            $imageURL->product_thumbnail = $destinationPath;
+                        }
 
                         $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->get();
 //                        dd($MultipleImage);
