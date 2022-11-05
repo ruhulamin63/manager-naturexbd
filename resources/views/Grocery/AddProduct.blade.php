@@ -85,17 +85,28 @@
                                                 <input type="text" class="form-control" name="measuring_unit_new" placeholder="Enter measuring unit" required>
                                             </div>
 
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Custom URL (Slug)</label>
+                                                <input type="text" class="form-control" name="url" placeholder="Enter custom url">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Short Description</label>
+                                                <textarea type="text" class="form-control" name="short_description" placeholder="Enter short Description"></textarea>
+                                            </div>
+
+
                                             <div class="col-12 col-sm-12 col-lg-12 mb-2">
                                                 <label>Meta Title &nbsp;&nbsp; <span style="color: #96271A">*SEO</span></label>
-                                                <input type="text" class="form-control" name="meta_title" placeholder="Enter Title" required>
+                                                <input type="text" class="form-control" name="meta_title" placeholder="Enter Title">
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Description &nbsp; &nbsp; <span style="color: #96271A">*SEO</span></label>
-                                                <textarea type="text" class="form-control" name="meta_description" value="" placeholder="Enter Description" required></textarea>
+                                                <textarea type="text" class="form-control" name="meta_description" placeholder="Enter Description"></textarea>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Product)</span></label>
-                                                <textarea type="text" class="form-control" name="meta_keywords" value="" placeholder="Enter Keywords"></textarea>
+                                                <textarea type="text" class="form-control" name="meta_keywords" placeholder="Enter Keywords"></textarea>
                                             </div>
 
                                             <div class="col-12 col-sm-12">

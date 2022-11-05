@@ -120,6 +120,10 @@ class ProductController extends Controller
                             $newProduct->cityID = $cityList[0]->id;
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
+
+                            $newProduct->url = $request->input('url');
+                            $newProduct->short_description = $request->input('short_description');
+
                             $newProduct->trade_price = $request->input('trade_price');
                             $newProduct->product_price = $request->input('product_price');
                             $newProduct->measuring_unit = "N/A";
@@ -152,14 +156,17 @@ class ProductController extends Controller
 
 //                            dd($request->images);
 
-                            foreach ($request->images as $image) {
-                                $productMultiImage = new ProductMultiImage();
-                                $productMultiImage->product_id = $newProduct->id;
-                                $productMultiImage->image_path = $image;
-                                $productMultiImage->status = 'Active';
-                                $productMultiImage->save();
+                            if($request->images != null){
+                                foreach ($request->images as $image) {
+                                    $productMultiImage = new ProductMultiImage();
+                                    $productMultiImage->product_id = $newProduct->id;
+                                    $productMultiImage->image_path = $image;
+                                    $productMultiImage->status = 'Active';
+                                    $productMultiImage->save();
 //                                dd($productMultiImage);
+                                }
                             }
+
                             //======================================
 //                            dd('ok');
                         } else {
@@ -709,9 +716,12 @@ class ProductController extends Controller
                         'message' => 'Required data missing.'
                     ]);
                 } else {
-                    $currentData = Products::select('*')->where('id', $request->input('product_id'))->get();
-                    if ($request->has('product_thumbnail')) {
-                        $path = public_path() . $currentData[0]->product_thumbnail;
+
+//                    dd($request->all());
+
+                    $currentData = Products::where('id', $request->input('product_id'))->first();
+//                    if ($request->has('product_thumbnail')) {
+//                        $path = public_path() . $currentData[0]->product_thumbnail;
 //                        if (file_exists($path)){
 //                            unlink($path);
 //                        }
@@ -723,63 +733,104 @@ class ProductController extends Controller
 //                        Storage::delete($imageURL);
 //                        $imageURL = '/app/grocery/products/' . $imageID . '.' . $extension;
 
-                        $imageURL = "";
-                        if(file($request->product_thumbnail)){
-                            $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
-                            $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
-                            $imageURL = $destinationPath;
+                        if($request->product_thumbnail != "") {
+                            if (file($request->product_thumbnail)) {
+                                $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
+                                $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
+                                $currentData->product_thumbnail = $destinationPath;
+                            }
                         }
-                        Products::where('product_name', $currentData[0]->product_name)->update([
+                        $currentData->save();
+    //                        dd($MultipleImage);
+//                        foreach ($MultipleImage as $image) {
+//                            $path = public_path() . $image->image_path;
+//                            if (file_exists($path)){
+//                                unlink($path);
+//                            }
+//                        }
+//                    dd($request->input('product_id'));
+                    $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->first();
+//                    dd($MultipleImage);
+                    if($MultipleImage != null){
+                        if($request->images != null){
+                            foreach ($request->images as $image) {
+                                $MultipleImage->product_id = $request->input('product_id');
+                                $MultipleImage->image_path = $image;
+                                $MultipleImage->status = 'Active';
+//                                dd($productMultiImage);
+                            }
+                            $MultipleImage->save();
+                        }
+                    }else{
+                        if($request->images != null){
+                            foreach ($request->images as $image) {
+                                $productMultiImage = new ProductMultiImage();
+                                $productMultiImage->product_id = $request->input('product_id');
+                                $productMultiImage->image_path = $image;
+                                $productMultiImage->status = 'Active';
+                                $productMultiImage->save();
+                            }
+                        }
+                    }
+
+
+                        Products::where('product_name', $currentData->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description'),
-                            'product_thumbnail' => $imageURL
                         ]);
 
                         Products::where('id', $request->input('product_id'))->update([
                             'trade_price' => $request->input('trade_price'),
+                            'url' => $request->input('url'),
+                            'short_description' => $request->input('short_description'),
                             'product_price' => $request->input('product_price'),
                             'measuring_unit_new' => $request->input('measuring_unit_new'),
                             'meta_title' => $request->input('meta_title'),
                             'meta_description' => $request->input('meta_description'),
                             'meta_keywords' => $request->input('meta_keywords')
                         ]);
-                    } else {
-
-                        $imageURL = "";
-                        if(file($request->product_thumbnail)){
-                            $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
-                            $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
-                            $imageURL->product_thumbnail = $destinationPath;
-                        }
-
-                        $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->get();
-//                        dd($MultipleImage);
-                        foreach ($MultipleImage as $image) {
-                            $path = public_path() . $image->image_path;
-                            if (file_exists($path)){
-                                unlink($path);
-                            }
-                        }
+//                    } else {
+//
+//                        $imageURL = "";
+//                        if($request->product_thumbnail != ""){
+//                            if(file($request->product_thumbnail)){
+//                                $destinationPath = '/base-product/' . uniqid() . '.' . $request->product_thumbnail->extension();
+//                                $request->product_thumbnail->storePubliclyAs('public', $destinationPath);
+//                                $imageURL->product_thumbnail = $destinationPath;
+//                            }
+//                        }
+//
+//
+//                        $MultipleImage = ProductMultiImage::where('product_id', $request->input('product_id'))->get();
+////                        dd($MultipleImage);
+//                        foreach ($MultipleImage as $image) {
+//                            $path = public_path() . $image->image_path;
+//                            if (file_exists($path)){
+//                                unlink($path);
+//                            }
+//                        }
                         //update multi image model
 //                        ProductMultiImage::where('product_id', $request->input('product_id'))->update([
 //                            'product_name' => $request->input('product_name'),
 //                            'product_description' => $request->input('product_description')
 //                        ]);
-
-                        Products::where('product_name', $currentData[0]->product_name)->update([
-                            'product_name' => $request->input('product_name'),
-                            'product_description' => $request->input('product_description')
-                        ]);
-
-                        Products::where('id', $request->input('product_id'))->update([
-                            'trade_price' => $request->input('trade_price'),
-                            'product_price' => $request->input('product_price'),
-                            'measuring_unit_new' => $request->input('measuring_unit_new'),
-                            'meta_title' => $request->input('meta_title'),
-                            'meta_description' => $request->input('meta_description'),
-                            'meta_keywords' => $request->input('meta_keywords')
-                        ]);
-                    }
+//
+//                        Products::where('product_name', $currentData[0]->product_name)->update([
+//                            'product_name' => $request->input('product_name'),
+//                            'product_description' => $request->input('product_description')
+//                        ]);
+//
+//                        Products::where('id', $request->input('product_id'))->update([
+//                            'trade_price' => $request->input('trade_price'),
+//                            'url' => $request->input('url'),
+//                            'short_description' => $request->input('short_description'),
+//                            'product_price' => $request->input('product_price'),
+//                            'measuring_unit_new' => $request->input('measuring_unit_new'),
+//                            'meta_title' => $request->input('meta_title'),
+//                            'meta_description' => $request->input('meta_description'),
+//                            'meta_keywords' => $request->input('meta_keywords')
+//                        ]);
+//                    }
 
                     return redirect()->back()->with([
                         'error' => false,
