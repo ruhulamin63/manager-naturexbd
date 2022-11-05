@@ -76,7 +76,11 @@
                                                     <th>SN</th>
                                                     <th>Base Image</th>
                                                     <th>Multi-Images</th>
-                                                    <th>Product Info</th>
+                                                    <th>Product Name</th>
+                                                    <th>Product Description</th>
+                                                    <th>Custom URL</th>
+                                                    <th>Short Description</th>
+                                                    <th>SEO Keywords</th>
                                                     <th>Category</th>
                                                     <th>Trade Price</th>
                                                     <th>Retail Price</th>
@@ -100,12 +104,14 @@
                                                     </td>
                                                     <td>
                                                         {{ $item->product_name }}
-                                                        <br>
-                                                        <small>{{ $item->product_description }}</small>>
 {{--                                                        <small><b>Created at:</b> {{ date('d M Y h:i:s A', strtotime($item->created_at)) }}</small>--}}
 {{--                                                        <br>--}}
 {{--                                                        <small><b>Modified at:</b> {{ date('d M Y h:i:s A', strtotime($item->updated_at)) }}</small>--}}
                                                     </td>
+                                                    <td>{!! Str::limit($item->product_description, 20), '...' !!}</td>
+                                                    <td>{{ $item->url }}</td>
+                                                    <td>{{ Str::limit($item->short_description, 20), '...' }}</td>
+                                                    <td>{{ $item->meta_keywords }}</td>
                                                     <td>{{ $item->category }}</td>
                                                     <td>৳{{ number_format($item->trade_price, 2) }}</td>
                                                     <td>৳{{ number_format($item->product_price, 2) }}</td>
