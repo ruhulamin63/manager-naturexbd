@@ -121,6 +121,8 @@ class ProductController extends Controller
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
 
+                            $newProduct->stock = $request->input('stock');
+
                             $newProduct->url = $request->input('url');
                             $newProduct->short_description = $request->input('short_description');
 
@@ -781,6 +783,7 @@ class ProductController extends Controller
 
                         Products::where('id', $request->input('product_id'))->update([
                             'trade_price' => $request->input('trade_price'),
+                            'stock' => $request->input('stock'),
                             'url' => $request->input('url'),
                             'short_description' => $request->input('short_description'),
                             'product_price' => $request->input('product_price'),
