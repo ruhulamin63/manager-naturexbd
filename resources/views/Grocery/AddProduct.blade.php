@@ -95,8 +95,14 @@
                                                 <textarea type="text" class="form-control" name="short_description" placeholder="Enter short Description"></textarea>
                                             </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Stock In/Out</label>
+                                                <input type="text" class="form-control" name="stock" placeholder="Enter stock">
 
-                                            <div class="col-12 col-sm-12 col-lg-12 mb-2">
+                                            </div>
+
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Title &nbsp;&nbsp; <span style="color: #96271A">*SEO</span></label>
                                                 <input type="text" class="form-control" name="meta_title" placeholder="Enter Title">
                                             </div>

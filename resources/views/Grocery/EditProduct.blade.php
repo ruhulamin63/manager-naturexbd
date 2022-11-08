@@ -84,14 +84,21 @@
                                             </div>
 
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Meta Description &nbsp; &nbsp; <span style="color: #96271A">*SEO</span></label>
+                                                <textarea type="text" class="form-control" name="meta_description" placeholder="Enter Description">{{ $productDetails->meta_description }}</textarea>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Stock In/Out</label>
+                                                <input type="text" class="form-control" name="stock" value="{{ $productDetails->stock }}" placeholder="Enter stock">
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Title &nbsp;&nbsp; *(SEO)</label>
                                                 <input type="text" class="form-control" name="meta_title" value="{{ $productDetails->meta_title }}" placeholder="Enter Title">
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                                <label>Meta Description &nbsp; &nbsp; <span style="color: #96271A">*SEO</span></label>
-                                                <textarea type="text" class="form-control" name="meta_description" placeholder="Enter Description">{{ $productDetails->meta_description }}</textarea>
-                                            </div>
+
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Product)</span></label>
                                                     <textarea type="text" class="form-control" name="meta_keywords" placeholder="Enter Keywords">{{ $productDetails->meta_keywords }}</textarea>
