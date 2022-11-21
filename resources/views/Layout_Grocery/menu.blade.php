@@ -310,8 +310,8 @@
                     <span class="menu-title" data-i18n="Category Manager">Product Manager</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="nav-item @if(isset($cityID) && $cityID == $city->id && (url('/grocery/products') == Request::url())) active @endif">
-                        <a class="nav-hover" href="{{ url('/grocery/products') . '?city=' . $city->id }}">
+                    <li class="nav-item @if(url('/grocery/products') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/grocery/products') . '?city=1' }}">
                             <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title">All Products</span>
                         </a>

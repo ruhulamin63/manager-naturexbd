@@ -118,12 +118,12 @@
                                                     <td>
                                                         @if($item->status == "Active")
                                                             <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
-                                                                <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="Inactive" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
+                                                                <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="Inactive" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}')">
                                                                 <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                             </div>
                                                         @else
                                                             <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
-                                                                <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="Active" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}', '{{ $cityID }}')">
+                                                                <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="Active" onclick="statusUpdate('{{ $item->id }}', '{{ $key }}')">
                                                                 <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                             </div>
                                                         @endif
@@ -131,7 +131,7 @@
 
                                                     <td class="text-center">
                                                         @if(strpos($permission, 'edit_product') !== false)
-                                                            <a href="{{ url('/grocery/products/edit?id=' . $item->id) }}">
+                                                            <a href="{{ url('/grocery/products/edit?id=1') }}">
                                                                 <div class="badge badge-pill badge-secondary mb-1 round-cursor">Edit</div>
                                                             </a>
                                                         @endif
@@ -211,9 +211,9 @@
     @include('Layout_Grocery.scripts')
 
     <script>
-        import Swal from "laravel-mix/src/Dispatcher";
+        // import Swal from "laravel-mix/src/Dispatcher";
 
-        function statusUpdate(product_id, item, city_id) {
+        function statusUpdate(product_id, item) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "Active") {
                 status = "Active";
@@ -229,7 +229,7 @@
                 url: "{{ url('/grocery/products/status/update') }}",
                 type: "POST",
                 data: {
-                    city_id: city_id,
+                    // city_id: city_id,
                     product_id: product_id,
                     product_status: status
                 },

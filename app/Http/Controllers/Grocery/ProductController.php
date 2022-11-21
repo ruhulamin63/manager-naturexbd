@@ -619,7 +619,7 @@ class ProductController extends Controller
         if ($this->isLoggedIn($request)) {
             if ($this->hasPermission($request, 'update_product')) {
                 $validator = Validator::make($request->all(), [
-                    'city_id' => 'required',
+//                    'city_id' => 'required',
                     'product_id' => 'required',
                     'product_status' => 'required'
                 ]);
@@ -630,7 +630,7 @@ class ProductController extends Controller
                         'message' => 'Required data missing.'
                     ]);
                 } else {
-                    $update = Products::where('cityID', $request->input('city_id'))
+                    $update = Products::where('cityID', 1)
                         ->where('id', $request->input('product_id'))
                         ->update(['status' => $request->input('product_status')]);
 
@@ -775,7 +775,6 @@ class ProductController extends Controller
                         }
                     }
 
-
                         Products::where('product_name', $currentData->product_name)->update([
                             'product_name' => $request->input('product_name'),
                             'product_description' => $request->input('product_description'),
@@ -784,6 +783,8 @@ class ProductController extends Controller
                         Products::where('id', $request->input('product_id'))->update([
                             'trade_price' => $request->input('trade_price'),
                             'stock' => $request->input('stock'),
+                            'category' => $request->input('product_category'),
+                            'product_type' => $request->input('product_type'),
                             'url' => $request->input('url'),
                             'short_description' => $request->input('short_description'),
                             'product_price' => $request->input('product_price'),

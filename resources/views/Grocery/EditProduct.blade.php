@@ -57,7 +57,7 @@
                                         @csrf
                                         <input type="text" name="product_id" value="{{ $productID }}" required hidden />
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-lg-12 mb-2">
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Product Name</label>
                                                 <input type="text" class="form-control" name="product_name" value="{{ $productDetails->product_name }}" placeholder="Enter product name" required>
                                             </div>
@@ -65,6 +65,35 @@
                                                 <label>Trade Price</label>
                                                 <input type="number" class="form-control" name="trade_price" value="{{ $productDetails->trade_price }}" placeholder="Enter trade price" required>
                                             </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <fieldset class="form-group">
+                                                    <select name="product_category" class="form-control" id="basicSelect" required>
+                                                        <option disabled selected>Select product category</option>
+                                                        @foreach($categoryList as $key => $item)
+                                                            <option value="{{ $item->category }}">{{ $item->category }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <fieldset class="form-group">
+                                                    <select name="product_type" class="form-control" id="product_type" onclick="offerProduct()" required>
+                                                        @if($productDetails->product_type == 3)
+                                                            <option value="3" selected>Offer Product</option>
+                                                        @elseif($productDetails->product_type == 2)
+                                                            <option value="2">Feature + Reqular Product</option>
+                                                        @else
+                                                            <option value="1">Reqular Product</option>
+                                                        @endif
+                                                            <option value="1">Reqular Product</option>
+                                                            <option value="2">Feature + Reqular Product</option>
+                                                            <option value="3">Offer Product</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Retail Product Price</label>
                                                 <input type="number" class="form-control" name="product_price" value="{{ $productDetails->product_price }}" placeholder="Enter retail price" required>

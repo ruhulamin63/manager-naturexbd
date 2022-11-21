@@ -567,12 +567,17 @@ class RouteController extends Controller
                     $productID = $request->input('id');
                     $productDetails = Products::select('*')->where('id', $productID)->get();
                     $cityList = City::all();
+
+                    $category = Category::all();
+                    $categoryList = $category->unique('category');
+
                     return view('Grocery.EditProduct')
                         ->with('title', 'Products | Grocery')
                         ->with('date', date('d-M-Y'))
                         ->with('cityList', $cityList)
                         ->with('productID', $productID)
-                        ->with('productDetails', $productDetails[0]);
+                        ->with('productDetails', $productDetails[0])
+                        ->with('categoryList', $categoryList);
                 } else {
                     return redirect()->back();
                 }
