@@ -83,9 +83,9 @@
                                                         @if($productDetails->product_type == 3)
                                                             <option value="3" selected>Offer Product</option>
                                                         @elseif($productDetails->product_type == 2)
-                                                            <option value="2">Feature + Reqular Product</option>
+                                                            <option value="2">Feature + Regular Product</option>
                                                         @else
-                                                            <option value="1">Reqular Product</option>
+                                                            <option value="1">Regular Product</option>
                                                         @endif
                                                             <option value="1">Reqular Product</option>
                                                             <option value="2">Feature + Reqular Product</option>
