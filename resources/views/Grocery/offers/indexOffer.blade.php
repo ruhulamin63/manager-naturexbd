@@ -42,10 +42,10 @@
                                 </div>
                             </div>
                         @endif
-                        @php
-                            $permission = \App\Models\Grocery\Admin::select('*')->where('email', session()->get('GR_MANAGER_EMAIL'))->get();
-                            $permission = $permission[0];
-                        @endphp
+{{--                        @php--}}
+{{--                            $permission = \App\Models\Grocery\Admin::select('*')->where('email', session()->get('GR_MANAGER_EMAIL'))->get();--}}
+{{--                            $permission = $permission[0];--}}
+{{--                        @endphp--}}
                     </div>
                     <div class="restaurant-list-table">
                         <div class="card">
@@ -56,19 +56,18 @@
                                         <table id="six-item-datatable" class="table">
                                             <thead>
                                             <tr>
-                                                <th>#SL</th>
+                                                <th>##</th>
                                                 <th>Image</th>
-                                                <th>Title</th>
-                                                <th>Meta Keyword</th>
+                                                <th>Offer Name</th>
+                                                <th>Custom Url</th>
+                                                <th>Meta Keywords</th>
                                                 <th>Description</th>
-                                                <th>Video</th>
-                                                <th>Created On</th>
                                                 <th>Status</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($blogList as $key => $item)
+                                            @foreach($offerList as $key => $item)
                                                 <tr>
                                                     <td>
                                                         {{ $key+1 }}
@@ -84,25 +83,18 @@
                                                     @endif
 
                                                     <td>
-                                                        {{ $item->title }}
+                                                        {{ $item->offer_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->url }}
                                                     </td>
                                                     <td>
                                                         {{ $item->meta_keyword }}
                                                     </td>
 
                                                     <td>
-                                                       {{ $item->description }}
+                                                        {{ $item->description }}
                                                     </td>
-
-                                                    @if($item->video_path)
-                                                        <td>
-                                                            <iframe src="{{ asset('/storage'.$item->video_path) }}" height="80px" width="200px" alt="blog video" style="border: 1px solid #000000;"></iframe>
-                                                        </td>
-                                                    @else
-                                                        <td style="color: #96271A">
-                                                            No Video
-                                                        </td>
-                                                    @endif
 
                                                     <td>
                                                         {{ date('d M Y h:i:s A', strtotime($item->created_at)) }}
@@ -121,14 +113,9 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-{{--                                                        @if(strpos($permission, 'edit_product') !== false)--}}
-                                                            <a href="{{ url('/blog/edit/' . $item->id) }}">
-                                                                <div class="badge badge-pill badge-secondary mb-1 round-cursor">Edit</div>
-                                                            </a>
-{{--                                                        @endif--}}
-{{--                                                        @if(strpos($permission, 'update_product_category') !== false)--}}
-{{--                                                            <div class="badge badge-pill badge-warning round-cursor" onclick="updateCategory('{{ $item->product_name }}','{{ $item->category }}')">Change<br>Category</div>--}}
-{{--                                                        @endif--}}
+                                                        <a href="{{ url('/offer/edit/' . $item->id) }}">
+                                                            <div class="badge badge-pill badge-secondary mb-1 round-cursor">Edit</div>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -147,61 +134,12 @@
     </div>
     <!-- END: Content-->
 
-{{--    <div class="sidenav-overlay"></div>--}}
-{{--    <div class="drag-target"></div>--}}
-
-{{--    <div class="modal fade text-left" id="categoryChange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" style="display: none;" aria-hidden="true">--}}
-{{--        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md" role="document">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h4 class="modal-title" id="myModalLabel33">Change Category</h4>--}}
-{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                        <i class="bx bx-x"></i>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <form action="{{ url('/grocery/products/edit/category') }}" method="POST">--}}
-{{--                    @csrf--}}
-{{--                    <div class="modal-body">--}}
-{{--                        <div class="row">--}}
-{{--                            <input type="text" id="product_name" name="product_name" value="" hidden />--}}
-{{--                            <input type="text" id="current_category" name="current_category" value="" hidden />--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <h6>Current Category</h6>--}}
-{{--                                <fieldset class="form-group">--}}
-{{--                                    <select class="form-control" id="currentCategory" disabled>--}}
-{{--                                    </select>--}}
-{{--                                </fieldset>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <h6>New Category</h6>--}}
-{{--                                <fieldset class="form-group">--}}
-{{--                                    <select class="form-control" name="new_category" id="newCategory" required>--}}
-{{--                                    </select>--}}
-{{--                                </fieldset>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-footer">--}}
-{{--                        <button type="button" class="btn btn-light-secondary" data-dismiss="modal">--}}
-{{--                            <i class="bx bx-x d-block d-sm-none"></i>--}}
-{{--                            <span class="d-none d-sm-block">Close</span>--}}
-{{--                        </button>--}}
-{{--                        <button type="submit" class="btn btn-primary ml-1">--}}
-{{--                            <i class="bx bx-check d-block d-sm-none"></i>--}}
-{{--                            <span class="d-none d-sm-block">Save</span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
     @include('Layout_Grocery.footer')
 
     @include('Layout_Grocery.scripts')
 
     <script>
-        function statusUpdate(blog_id, item) {
+        function statusUpdate(offer_id, item) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "Active") {
                 status = "Active";
@@ -214,11 +152,11 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ url('/blog/status/update') }}",
+                url: "{{ url('/offer/status/update') }}",
                 type: "POST",
                 data: {
                     // city_id: city_id,
-                    blog_id: blog_id,
+                    offer_id: offer_id,
                     status: status
                 },
                 success: function(result) {
@@ -242,25 +180,6 @@
                 }
             });
         }
-
-        {{--function updateCategory(product_name, current_category) {--}}
-        {{--    $("#currentCategory").html("");--}}
-        {{--    $("#newCategory").html("");--}}
-        {{--    $("#product_name").val(product_name);--}}
-        {{--    categoryList = '@json($categoryList)';--}}
-        {{--    categoryList = JSON.parse(categoryList);--}}
-        {{--    for (i = 0; i < categoryList.length; i++) {--}}
-        {{--        if (current_category == categoryList[i].category) {--}}
-        {{--            var option = "<option value='" + categoryList[i].category + "' selected>" + categoryList[i].category + "</option>"--}}
-        {{--            $("#currentCategory").append(option);--}}
-        {{--            $("#current_category").val(categoryList[i].category);--}}
-        {{--        } else {--}}
-        {{--            var option = "<option value='" + categoryList[i].category + "'>" + categoryList[i].category + "</option>"--}}
-        {{--            $("#newCategory").append(option);--}}
-        {{--        }--}}
-        {{--    }--}}
-        {{--    $("#categoryChange").modal('show');--}}
-        {{--}--}}
     </script>
     </body>
 @endsection

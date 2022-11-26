@@ -77,7 +77,7 @@
                                                         <option disabled selected>Select product Type</option>
                                                         <option value="1">Reqular Product</option>
                                                         <option value="2">Feature + Reqular Product</option>
-                                                        <option value="3">Offer Product</option>
+                                                        <option value="3">Offer + Reqular Product</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -95,11 +95,11 @@
                                                 <textarea type="text" class="form-control" name="short_description" placeholder="Enter short Description"></textarea>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                                <label>Stock In/Out</label>
-                                                <input type="text" class="form-control" name="stock" placeholder="Enter stock">
+{{--                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">--}}
+{{--                                                <label>Stock In/Out</label>--}}
+{{--                                                <input type="text" class="form-control" name="stock" placeholder="Enter stock">--}}
 
-                                            </div>
+{{--                                            </div>--}}
 
 
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
@@ -189,6 +189,7 @@
                 $('.product_old_price_for_offer').hide();
             }
         }
+
     </script>
 
     <script>

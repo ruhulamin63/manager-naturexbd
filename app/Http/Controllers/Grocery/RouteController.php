@@ -568,8 +568,9 @@ class RouteController extends Controller
                     $productDetails = Products::select('*')->where('id', $productID)->get();
                     $cityList = City::all();
 
-                    $category = Category::all();
-                    $categoryList = $category->unique('category');
+//                    $category = Category::all();
+                    $categoryList = Products::where('id', $request->input('id'))->first();
+//                    dd($categoryList);
 
                     return view('Grocery.EditProduct')
                         ->with('title', 'Products | Grocery')

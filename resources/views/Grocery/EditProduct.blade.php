@@ -69,10 +69,24 @@
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <fieldset class="form-group">
                                                     <select name="product_category" class="form-control" id="basicSelect" required>
-                                                        <option disabled selected>Select product category</option>
-                                                        @foreach($categoryList as $key => $item)
-                                                            <option value="{{ $item->category }}">{{ $item->category }}</option>
-                                                        @endforeach
+{{--                                                        <option disabled selected>Select product category</option>--}}
+{{--                                                        @foreach($categoryList as $key => $item)--}}
+                                                            @if($categoryList->category == 'Green tea')
+                                                                <option value="{{ $categoryList->category }}">Green tea</option>
+                                                            @elseif($categoryList->category == 'Natural Herbs')
+                                                                <option value="{{ $categoryList->category }}">Natural Herbs</option>
+                                                            @elseif($categoryList->category == 'Organic GHEE')
+                                                                <option value="{{ $categoryList->category }}">Organic GHEE</option>
+                                                            @elseif($categoryList->category == 'Health Care')
+                                                                <option value="{{ $categoryList->category }}">Health Care</option>
+                                                            @elseif($categoryList->category == 'Nuts & Fruits')
+                                                                <option value="{{ $categoryList->category }}">Nuts & Fruits</option>
+                                                            @elseif($categoryList->category == 'Natural Honey')
+                                                                <option value="{{ $categoryList->category }}">Natural Honey</option>
+                                                            @else
+                                                                <option value="{{ $categoryList->category }}">{{ $categoryList->category }}</option>
+                                                            @endif
+{{--                                                        @endforeach--}}
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -87,9 +101,9 @@
                                                         @else
                                                             <option value="1">Regular Product</option>
                                                         @endif
-                                                            <option value="1">Reqular Product</option>
-                                                            <option value="2">Feature + Reqular Product</option>
-                                                            <option value="3">Offer Product</option>
+                                                            <option value="1">Regular Product</option>
+                                                            <option value="2">Feature + Regular Product</option>
+                                                            <option value="3">Offer + Regular Product</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -117,10 +131,10 @@
                                                 <textarea type="text" class="form-control" name="meta_description" placeholder="Enter Description">{{ $productDetails->meta_description }}</textarea>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                                <label>Stock In/Out</label>
-                                                <input type="text" class="form-control" name="stock" value="{{ $productDetails->stock }}" placeholder="Enter stock">
-                                            </div>
+{{--                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">--}}
+{{--                                                <label>Stock In/Out</label>--}}
+{{--                                                <input type="text" class="form-control" name="stock" value="{{ $productDetails->stock }}" placeholder="Enter stock">--}}
+{{--                                            </div>--}}
 
                                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
                                                 <label>Meta Title &nbsp;&nbsp; *(SEO)</label>

@@ -12,6 +12,8 @@
 */
 
 use App\Http\Controllers\Grocery\BlogController;
+use App\Http\Controllers\Grocery\OfferController;
+use App\Http\Controllers\Grocery\ProductController;
 use App\Http\Controllers\v1\RouteController;
 use Illuminate\Support\Facades\Route;
 
@@ -98,13 +100,22 @@ Route::post('/grocery/category/prePayment/update', 'Grocery\CategoryController@c
 
 
 //start writing by Ruhul
-Route::get('/blog/show', [RouteController::class, 'addBlog']);
+//Route::get('/blog/show', [RouteController::class, 'addBlog']);
 Route::get('/blog/show',[BlogController::class, 'index'])->name('blog.show');
 Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
 Route::post('/blog/store',[BlogController::class, 'store'])->name('blog.store');
 Route::get('/blog/edit/{id}',[BlogController::class, 'edit'])->name('blog.edit');
 Route::post('/blog/update/{id}',[BlogController::class, 'update'])->name('blog.update');
 Route::post('/blog/status/update', [BlogController::class, 'blogStatusUpdate'])->name('blog.status.update');
+
+
+//offer
+Route::get('/offer/show',[OfferController::class, 'index'])->name('offer.show');
+Route::get('/offer/create',[OfferController::class, 'create'])->name('offer.create');
+Route::post('/offer/store',[OfferController::class, 'store'])->name('offer.store');
+Route::get('/offer/edit/{id}',[OfferController::class, 'edit'])->name('offer.edit');
+Route::post('/offer/update/{id}',[OfferController::class, 'update'])->name('offer.update');
+Route::post('/offer/status/update', [OfferController::class, 'offerStatusUpdate'])->name('offer.status.update');
 
 //End writing by Ruhul
 
@@ -121,6 +132,7 @@ Route::get('/grocery/products/edit', 'Grocery\RouteController@editProduct');
 Route::post('/grocery/products/edit/confirm', 'Grocery\ProductController@editProduct');
 Route::post('/grocery/products/edit/category', 'Grocery\ProductController@editCategory');
 Route::post('/grocery/products/status/update', 'Grocery\ProductController@productStatusUpdate');
+Route::post('/grocery/products/stock/update', [ProductController::class, 'productStockUpdate']);
 
 Route::get('/grocery/order', 'Grocery\RouteController@orders');
 Route::get('/grocery/order/new', 'Grocery\RouteController@createManualOrder');

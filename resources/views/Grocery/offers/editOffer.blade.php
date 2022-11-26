@@ -3,9 +3,9 @@
 @section('body')
 
     <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
     @include('Layout_Grocery.menu')
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -45,34 +45,38 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add New Blog</h4>
+                                <h4 class="card-title">Edit Offer</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('blog.store') }}" enctype="multipart/form-data" method="POST">
+                                    <form action="{{ url('offer/update/'. $offerData->id) }}" enctype="multipart/form-data" method="POST">
                                         @csrf
+                                        <input type="text" name="offer_id" value="{{ $offerData->id }}" required hidden />
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-lg-12">
-                                                <label >Blog Name</label>
-                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter title">
-                                                <br>
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-2">
+                                                <label>Offer Name</label>
+                                                <input type="text" class="form-control" name="offer_name" value="{{ $offerData->offer_name }}" placeholder="Enter offer name" required>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-12">
-                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Blog)</span></label>
-                                                <input type="text" class="form-control" name="meta_keyword" id="meta_keyword" placeholder="meta keyword">
-                                                <br>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label>Meta Keyword</label>
+                                                <input type="text" class="form-control" name="meta_keyword" value="{{ $offerData->meta_keyword }}" placeholder="meta keyword" required>
                                             </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label >Custom Link</label>
+                                                <input type="text" class="form-control" name="url" id="url" value="{{ $offerData->url }}" placeholder="custom url">
+                                                <br>
+                                            </div>
 
                                             <div class="col-12 col-sm-12">
                                                 <label >Description</label>
                                                 <fieldset class="form-group">
-                                                    <textarea class="form-control" name="blog_description" id="basicTextarea" rows="3" placeholder="Blog Description"></textarea>
+                                                    <textarea class="form-control" name="offer_description" id="basicTextarea" rows="3" placeholder="Blog Description">{{ $offerData->description }}</textarea>
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1">
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-1">
                                                 <label >Image</label>
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
@@ -82,18 +86,8 @@
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1">
-                                                <label >Video</label>
-                                                <fieldset class="form-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="blog_video">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Video</label>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12" style="margin-top: 10px;">
-                                                <button type="submit" class="btn btn-block btn-success glow">Submit</button>
+                                            <div class="col-12 col-sm-12" style="margin-top: 10px">
+                                                <button type="submit" class="btn btn-block btn-success glow">Update Offer</button>
                                             </div>
                                         </div>
                                     </form>
@@ -116,7 +110,7 @@
     @include('Layout_Grocery.scripts')
 
     <script>
-        CKEDITOR.replace( 'blog_description' );
+        CKEDITOR.replace( 'offer_description' );
     </script>
 
     </body>

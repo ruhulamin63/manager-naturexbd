@@ -82,6 +82,8 @@
                                                     <th>Short Description</th>
                                                     <th>SEO Keywords</th>
                                                     <th>Category</th>
+                                                    <th>Measuring Unit</th>
+                                                    <th>Stock In/Out</th>
                                                     <th>Trade Price</th>
                                                     <th>Retail Price</th>
                                                     <th>Status</th>
@@ -113,6 +115,22 @@
                                                     <td>{{ Str::limit($item->short_description, 20), '...' }}</td>
                                                     <td>{{ $item->meta_keywords }}</td>
                                                     <td>{{ $item->category }}</td>
+                                                    <td>{{ $item->measuring_unit_new }}</td>
+
+                                                    <td>
+                                                        @if($item->stock == "Stock In")
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
+                                                                <input type="checkbox" class="custom-control-input" checked="" id="stockStatusSwitch{{ $key }}" value="Stock Out" onclick="stockStatusUpdate('{{ $item->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="stockStatusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        @else
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1" style="margin-top: 15px;">
+                                                                <input type="checkbox" class="custom-control-input" id="stockStatusSwitch{{ $key }}" value="Stock In" onclick="stockStatusUpdate('{{ $item->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="stockStatusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        @endif
+                                                    </td>
+
                                                     <td>৳{{ number_format($item->trade_price, 2) }}</td>
                                                     <td>৳{{ number_format($item->product_price, 2) }}</td>
                                                     <td>
@@ -232,6 +250,48 @@
                     // city_id: city_id,
                     product_id: product_id,
                     product_status: status
+                },
+                success: function(result) {
+                    if (!result.error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'danger',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                }
+            });
+        }
+
+        function stockStatusUpdate(product_id, item) {
+            var status = "";
+            if ($("#stockStatusSwitch" + item).val() == "Stock In") {
+                status = "Stock In";
+                $("#stockStatusSwitch" + item).val("Stock Out");
+            } else {
+                status = "Stock Out";
+                $("#stockStatusSwitch" + item).val("Stock In");
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('/grocery/products/stock/update') }}",
+                type: "POST",
+                data: {
+                    // city_id: city_id,
+                    product_id: product_id,
+                    stock: status
                 },
                 success: function(result) {
                     if (!result.error) {

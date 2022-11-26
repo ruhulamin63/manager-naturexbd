@@ -119,6 +119,28 @@
             </li>
 {{--            End Blog Menu--}}
 
+            <li class="nav-item has-sub">
+                <a href="#">
+                    <i class="bx bxs-package mr-50"></i>
+                    <span class="menu-title" data-i18n="Category Manager">Offer Menu</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item @if(url('/offer/show') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/offer/show')}}">
+                            <i class="bx bxs-navigation mr-50"></i>
+                            <span class="menu-title">Show Offer</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item @if(url('/offer/create') == Request::url()) active @endif">
+                        <a class="nav-hover" href="{{ url('/offer/create') }}">
+                            <i class="bx bx-add-to-queue mr-50"></i>
+                            <span class="menu-title">Create Offer</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <!-- Restaurant Menu Start -->
             <li class=" navigation-header"><span>Restaurant Menu</span></li>
             <li class="nav-item has-sub">

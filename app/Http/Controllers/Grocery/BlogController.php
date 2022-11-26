@@ -117,6 +117,7 @@ class BlogController extends Controller
                         $newBlog = new Blog();
                         $newBlog->title = $request->title;
                         $newBlog->slug =  Str::slug($request->title);
+                        $newBlog->meta_keyword =  Str::slug($request->meta_keyword);
                         $newBlog->description = $request->blog_description;
 
 //                        if($request->hasFile('blog_image')){
@@ -240,6 +241,7 @@ class BlogController extends Controller
                         $newBlog = Blog::findOrFail($id);
                         $newBlog->title = $request->title;
                         $newBlog->slug =  Str::slug($request->title);
+                        $newBlog->meta_keyword =  Str::slug($request->meta_keyword);
                         $newBlog->description = $request->blog_description;
 
 //                        if($request->hasFile('blog_image')){

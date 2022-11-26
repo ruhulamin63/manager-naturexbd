@@ -121,7 +121,7 @@ class ProductController extends Controller
                             $newProduct->category = $request->input('product_category');
                             $newProduct->product_name = $request->input('product_name');
 
-                            $newProduct->stock = $request->input('stock');
+//                            $newProduct->stock = $request->input('stock');
 
                             $newProduct->url = $request->input('url');
                             $newProduct->short_description = $request->input('short_description');
@@ -133,7 +133,7 @@ class ProductController extends Controller
 
                             $newProduct->meta_title = $request->input('meta_title');
                             $newProduct->meta_description = $request->input('meta_description');
-                            $newProduct->meta_keywords = $request->input('meta_keywords');
+                            $newProduct->meta_keywords = Str::slug($request->input('meta_keywords'));
 
                             $newProduct->product_description = $request->input('product_description');
                             $newProduct->offer_old_price = $request->input('product_old_price');
@@ -660,6 +660,53 @@ class ProductController extends Controller
         }
     }
 
+    //update product stock
+    public function productStockUpdate(Request $request)
+    {
+        if ($this->isLoggedIn($request)) {
+            if ($this->hasPermission($request, 'update_product')) {
+                $validator = Validator::make($request->all(), [
+//                    'city_id' => 'required',
+                    'product_id' => 'required',
+                    'stock' => 'required'
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Required data missing.'
+                    ]);
+                } else {
+                    $update = Products::where('cityID', 1)
+                        ->where('id', $request->input('product_id'))
+                        ->update(['stock' => $request->input('stock')]);
+
+                    if ($update) {
+                        return response()->json([
+                            'error' => false,
+                            'message' => 'Stock updated successfully.'
+                        ]);
+                    } else {
+                        return response()->json([
+                            'error' => true,
+                            'message' => 'Something went wrong.'
+                        ]);
+                    }
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'You don\'t have permission to edit data.'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Please login again to continue.'
+            ]);
+        }
+    }
+
     public function SeasonalCampainStatusUpdate(Request $request)
     {
         if ($this->isLoggedIn($request)) {
@@ -782,7 +829,7 @@ class ProductController extends Controller
 
                         Products::where('id', $request->input('product_id'))->update([
                             'trade_price' => $request->input('trade_price'),
-                            'stock' => $request->input('stock'),
+//                            'stock' => $request->input('stock'),
                             'category' => $request->input('product_category'),
                             'product_type' => $request->input('product_type'),
                             'url' => $request->input('url'),

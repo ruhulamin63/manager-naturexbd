@@ -58,6 +58,12 @@
                                                 <input type="text" class="form-control" name="title" value="{{ $blogData->title }}" placeholder="Enter product name" required>
                                             </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-12">
+                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Blog)</span></label>
+                                                <input type="text" class="form-control" name="meta_keyword" id="meta_keyword" value="{{ $blogData->meta_keyword }}" placeholder="meta keyword">
+                                                <br>
+                                            </div>
+
                                             <div class="col-12 col-sm-12">
                                                 <label >Description</label>
                                                 <fieldset class="form-group">

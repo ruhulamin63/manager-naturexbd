@@ -45,49 +45,44 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add New Blog</h4>
+                                <h4 class="card-title">Add New Offer</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('blog.store') }}" enctype="multipart/form-data" method="POST">
+                                    <form action="{{ route('offer.store') }}" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
-                                                <label >Blog Name</label>
-                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter title">
+                                                <label >Offer Name</label>
+                                                <input type="text" class="form-control" name="offer_name" id="offer_name" placeholder="Enter Offer Name">
                                                 <br>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-12">
-                                                <label>Meta Keywords &nbsp; &nbsp; <span style="color: #96271A">*SEO(Example: Test Best Blog)</span></label>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label >Meta Keyword</label>
                                                 <input type="text" class="form-control" name="meta_keyword" id="meta_keyword" placeholder="meta keyword">
                                                 <br>
                                             </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
+                                                <label >Custom Link</label>
+                                                <input type="text" class="form-control" name="url" id="url" placeholder="custom url">
+                                                <br>
+                                            </div>
 
                                             <div class="col-12 col-sm-12">
                                                 <label >Description</label>
                                                 <fieldset class="form-group">
-                                                    <textarea class="form-control" name="blog_description" id="basicTextarea" rows="3" placeholder="Blog Description"></textarea>
+                                                    <textarea class="form-control" name="offer_description" id="basicTextarea" rows="3" placeholder="Blog Description"></textarea>
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1">
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-1">
                                                 <label >Image</label>
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="blog_image">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="offer_image">
                                                         <label class="custom-file-label" for="inputGroupFile02">Choose Image</label>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1">
-                                                <label >Video</label>
-                                                <fieldset class="form-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="blog_video">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Video</label>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -116,7 +111,7 @@
     @include('Layout_Grocery.scripts')
 
     <script>
-        CKEDITOR.replace( 'blog_description' );
+        CKEDITOR.replace( 'offer_description' );
     </script>
 
     </body>
